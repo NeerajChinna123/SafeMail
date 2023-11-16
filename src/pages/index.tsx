@@ -3,7 +3,6 @@ import Banner from "@/containers/Banner";
 import AfterEffectsVideo from "../components/AfterEffects";
 import { BannerType, FitZoneType } from "../../typings";
 import Nav from "@/components/Nav";
-import AudioComponent from "@/components/AudioComponent";
 import RunoutPrediction from "@/containers/RunoutPrediction";
 import Footer from "@/containers/Footer";
 
