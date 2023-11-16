@@ -79,7 +79,7 @@ function RunoutPrediction() {
         <div className="w-[24rem] relative video-upload left h-[24rem] p-5 border border-black shadow-md shadow-gray-500 rounded-md">
           <div>
             <p className="text-black text-center text-xl underline">
-              Upload a video showing the batsman's angle
+              Upload a video showing the batsman&apos;s angle
             </p>
             <VideoUpload setVideo1Prop={setVideo1} width={700} height={500} />
           </div>
