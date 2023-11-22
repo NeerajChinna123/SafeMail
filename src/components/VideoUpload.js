@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
+import { VideoToFrames, VideoToFramesMethod } from "../components/VideoToFrames";
 
 export default function VideoUpload(props) {
     const { width, height } = props;
@@ -12,9 +13,16 @@ export default function VideoUpload(props) {
         document.getElementById('fileInput').click();
     }
 
-    const handleFileChange = (event) => {
+    const handleFileChange = async (event) => {
         const file = event.target.files[0];
         const url = URL.createObjectURL(file);
+        const frames = await VideoToFrames.getFrames(
+            url,
+            30,
+            VideoToFramesMethod.totalFrames
+          );
+        const firstTenElements = frames.slice(0, 10);
+        props?.setImages(firstTenElements);
         setSource(url);
         props?.setVideo1Prop(url);
     };

@@ -44,10 +44,7 @@ const Main = (props: propsData) => {
           {/* @ts-ignore */}
         </div>
         {/* @ts-ignore */}
-        <div>
-          <Footer />
-          {/* @ts-ignore */}
-        </div>
+        
         {/* @ts-ignore */}
       </main>
       {/* <div className="max-w-7xl ml-1 lg:mx-auto flex flex-row justify-center">
