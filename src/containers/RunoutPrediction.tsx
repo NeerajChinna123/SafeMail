@@ -8,7 +8,18 @@ import { mqttClient } from ".././../awsMqttClient";
 import axios from "axios";
 import { ImageWithBoundingBox } from "../components/ImageWithBoundingBox";
 import Footer from "./Footer";
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion'
 
+
+const animationVariants = {
+  initial: { opacity: 0 }, // Starting position off-screen (above)
+  animate: { opacity: 1 }, // Ending position (on-screen)
+};
+
+const animationTransition = {
+  duration: 1.8, // Duration of the animation
+  delay: 0.6, // Delay before the animation starts (in seconds)
+};
 
 function RunoutPrediction() {
   const [video1, setVideo1] = useState("");
@@ -38,6 +49,7 @@ function RunoutPrediction() {
   const [decisionMade, setDecisionMade] = useState("");
   const [decisionDone, setDecisionDone] = useState(false);
   const [frameDetect, setFrameDetected] = useState(false);
+  const [frameDetect2, setFrameDetected2] = useState(false);
 
   if (video1.length > 0) {
     setTimeout(() => {
@@ -64,14 +76,14 @@ function RunoutPrediction() {
 
     setTimeout(() => {
       setBorder1(true);
-    }, 1900);
+    }, 1000);
 
   }
 
 
   const DecisionClicked = async () => {
     setClicked(true);
-    window.location.href = "#decisonMade";
+    window.location.href = "#Frames";
     //@ts-ignore
     console.log('image-data : ', images2[0].imageData)
 
@@ -171,7 +183,14 @@ function RunoutPrediction() {
       setFrameDetected(true);
       setAnalyzeHeight3(190);
       setClicked(false);
+      setTimeout(() => {
+
+        setFrameDetected2(true)
+      }, 1000);
     }, 3000);
+
+   
+  
     console.log('api-respone-roboflow-api-calls', tempArray);
   };
 
@@ -265,7 +284,7 @@ function RunoutPrediction() {
       </div>
       <div className="flex flex-row justify-center mt-[12rem]">
         <div
-          id="DecisionClicked"
+          id="Frames"
           onClick={() => {
             (video2.length > 0) ? DecisionClicked() : "";
           }}
@@ -280,8 +299,8 @@ function RunoutPrediction() {
             } `}
         >
           {clicked ? (
-            <p className="animate-pulse hover:cursor-not-allowed w-[10rem] text-center h-[4rem] text-black pb-[2rem]">
-              Capturing the Moment: Bails Dislocated
+            <p className="animate-pulse hover:cursor-not-allowed w-[10rem] text-center h-[4rem] text-black pt-4">
+              Analyzing Frames
             </p>
           ) : (
 
@@ -323,15 +342,19 @@ function RunoutPrediction() {
             <p className="text-black text-center text-xl p-5 underline">
               Analyzed Frames
             </p>
-            <div className="grid grid-cols-3 gap-5 space-x-2 justify-center px-6">
+            {frameDetect2 &&
+              <motion.div  variants={animationVariants}
+              transition={animationTransition} className="grid grid-cols-3 gap-5 space-x-2 justify-center px-6">
 
-              {roboFlowApiCall.length > 0 && roboFlowApiCall?.map((roboFlow: any) => (
-                <div className="mb-4">
-                  <ImageWithBoundingBox data={roboFlow} />
-                </div>
-              ))}
+                {roboFlowApiCall.length > 0 && roboFlowApiCall?.map((roboFlow: any) => (
+                  <div className="mb-4">
 
-            </div>
+                    <ImageWithBoundingBox data={roboFlow} />
+                  </div>
+                ))}
+
+              </motion.div>
+            }
             {/* <VideoUpload setImages1={setImages} setVideo1Prop={setVideo1} width={700} height={500} /> */}
           </div>
           <div className="absolute left-[50%] bottom-[-60%] bottom-0 border border-l-gray h-[14rem]"></div>
@@ -375,12 +398,6 @@ function RunoutPrediction() {
           ></div>
         </div> */}
       </div>
-
-
-
-
-
-
 
 
       <div id="decisonMade" className="flex flex-row justify-center mt-[12rem]">
