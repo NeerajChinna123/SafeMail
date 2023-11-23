@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import React from "react";
 import VideoUpload from "../components/VideoUpload";
 import VideoUpload2 from "../components/VideoUpload2";
@@ -22,6 +22,32 @@ const animationTransition = {
 };
 
 function RunoutPrediction() {
+
+
+  function useIsVisible(ref: any) {
+    const [isIntersecting, setIntersecting] = useState(false);
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(([entry]) =>
+        setIntersecting(entry.isIntersecting)
+      );
+
+      observer.observe(ref.current);
+      return () => {
+        observer.disconnect();
+      };
+    }, [ref]);
+
+    return isIntersecting;
+  }
+
+
+  const otdRef = useRef(null);
+
+  const isVisibleAnalyze = useIsVisible(otdRef);
+
+
+
   const [video1, setVideo1] = useState("");
 
   const [video2, setVideo2] = useState("");
@@ -35,8 +61,14 @@ function RunoutPrediction() {
   const [roboFlowApiCall, setRoboFlowApiCall] = useState([]);
 
 
+  const [displayText, setDisplayText] = useState('Extracting Frames: Please wait, preparing video for analysis.')
+
+
   console.log('image frames  : ', images2);
   console.log("video1 length", video1.length > 0);
+
+
+  console.log('is visible analyze : ', isVisibleAnalyze)
 
   const [analyzeHeight, setAnalyzeHeight] = useState("0");
   const [analyzeWidth, setAnalyzeWidth] = useState("0");
@@ -50,6 +82,18 @@ function RunoutPrediction() {
   const [decisionDone, setDecisionDone] = useState(false);
   const [frameDetect, setFrameDetected] = useState(false);
   const [frameDetect2, setFrameDetected2] = useState(false);
+
+
+  const [analyzeHeight4, setAnalyzeHeight4] = useState("0");
+  const [analyzeHeight5, setAnalyzeHeight5] = useState("0");
+  const [analyzeHeight6, setAnalyzeHeight6] = useState("0");
+  const [analyzeWidth5, setAnalyzeWidth5] = useState("0");
+  const [analyzeWidth4, setAnalyzeWidth4] = useState("0");
+
+  const [firstElement, setFirstElement] = useState({});
+
+  const [displayImage, setDisplayImage] = useState(false);
+
 
   if (video1.length > 0) {
     setTimeout(() => {
@@ -123,6 +167,10 @@ function RunoutPrediction() {
     // };
 
 
+    setTimeout(() => {
+      setDisplayText('Analyzing Frames: Detecting bail dislocation...');
+    }, 10000);
+
     let tempArray: any[] = [];
 
     for (const image in images2) {
@@ -180,17 +228,22 @@ function RunoutPrediction() {
 
       //@ts-ignore
       setRoboFlowApiCall(tempArray);
+
+      console.log('identifying the temporary array : ', tempArray);
+
+      console.log('identify the first element : ', tempArray.find(item => item?.apiCallresponse?.predictions[0]?.class_id === 0));
+      const firstClassZeroElement = tempArray.find(item => item?.apiCallresponse?.predictions[0]?.class_id === 0);
+      //@ts-ignore
+      setFirstElement(firstClassZeroElement);
       setFrameDetected(true);
       setAnalyzeHeight3(190);
       setClicked(false);
       setTimeout(() => {
-
         setFrameDetected2(true)
       }, 1000);
+
     }, 3000);
 
-   
-  
     console.log('api-respone-roboflow-api-calls', tempArray);
   };
 
@@ -227,8 +280,34 @@ function RunoutPrediction() {
   //   }, 1000);
   // }
 
+  useEffect(() => {
+
+    if (isVisibleAnalyze) {
+      setTimeout(() => {
+        setAnalyzeHeight4("24%");
+      }, 1000);
+      setTimeout(() => {
+        setAnalyzeWidth4("26%");
+      }, 2000);
+      setTimeout(() => {
+        setAnalyzeHeight5("13.4%");
+      }, 3000);
+      setTimeout(() => {
+        setDisplayImage(true);
+      }, 4000);
+
+      setTimeout(() => {
+        setAnalyzeWidth5("25.8%");
+      }, 8000);
+
+      setTimeout(() => {
+        setAnalyzeHeight6("13.4%");
+      }, 9000);
+    }
+  }, [isVisibleAnalyze]);
 
 
+  console.log('first element : ', firstElement)
 
 
   return (
@@ -274,12 +353,12 @@ function RunoutPrediction() {
           ></div>
 
           {/* <div className=" absolute right-[50%] bottom-[-60%] bottom-0 border border-b-gray w-[13rem] "></div> */}
-          {/* <div
+          {/*<div
             style={{
               width: analyzeWidth2,
             }}
             className={`absolute right-[50%]  bottom-[-60%] bottom-0 transition-all ease-out duration-1000 border border-b-black`}
-          ></div> */}
+          ></div>  */}
         </div>
       </div>
       <div className="flex flex-row justify-center mt-[12rem]">
@@ -299,18 +378,18 @@ function RunoutPrediction() {
             } `}
         >
           {clicked ? (
-            <p className="animate-pulse hover:cursor-not-allowed w-[10rem] text-center h-[4rem] text-black pt-4">
-              Analyzing Frames
+            <p className="animate-pulse hover:cursor-not-allowed w-[10rem] text-center h-[4rem] text-black pt-0">
+              {displayText}
             </p>
           ) : (
 
             (frameDetect ? <p
               className={`${border1
-                ? "text-black opacity-[100%] w-[10rem] h-[4rem] pt-2 text-center pt-4 "
-                : " text-black opacity-[50%] w-[10rem] h-[4rem] pt-2 text-center pt-4 "
+                ? "text-black opacity-[100%] w-[10rem] h-[4rem] pt-2 text-center pt-2 "
+                : " text-black opacity-[50%] w-[10rem] h-[4rem] pt-2 text-center pt-2 "
                 }`}
             >
-              Frames Analyzed!
+              Frames Analyzed! : Analysis complete.
             </p> : <p
               className={`${border1
                 ? "text-black opacity-[100%] w-[10rem] h-[4rem] pt-2 text-center pt-4 "
@@ -343,8 +422,8 @@ function RunoutPrediction() {
               Analyzed Frames
             </p>
             {frameDetect2 &&
-              <motion.div  variants={animationVariants}
-              transition={animationTransition} className="grid grid-cols-3 gap-5 space-x-2 justify-center px-6">
+              <motion.div variants={animationVariants}
+                transition={animationTransition} className="grid grid-cols-3 gap-5 space-x-2 justify-center px-6">
 
                 {roboFlowApiCall.length > 0 && roboFlowApiCall?.map((roboFlow: any) => (
                   <div className="mb-4">
@@ -357,50 +436,78 @@ function RunoutPrediction() {
             }
             {/* <VideoUpload setImages1={setImages} setVideo1Prop={setVideo1} width={700} height={500} /> */}
           </div>
-          <div className="absolute left-[50%] bottom-[-60%] bottom-0 border border-l-gray h-[14rem]"></div>
+          <div className="absolute left-[50%] bottom-[-24%] border border-l-gray h-[14rem]"></div>
           <div
             style={{
-              height: analyzeHeight,
+              height: analyzeHeight4,
             }}
             className={`absolute left-[50%] top-[100%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
           ></div>
 
-          <div className=" absolute left-[50%] bottom-[-60%] bottom-0 border border-b-gray w-[13rem] "></div>
+
+          <div className="absolute left-[24%] bottom-[-37.5%] border border-l-gray h-[8rem]"></div>
           <div
             style={{
-              width: analyzeWidth,
+              height: analyzeHeight5,
             }}
-            className={`absolute left-[50%]  bottom-[-60%] bottom-0 transition-all ease-out duration-1000 border border-b-black`}
+            className={`absolute left-[24%] top-[124%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
           ></div>
+
+          <div className="absolute right-[24%] bottom-[-37.5%] border border-l-gray h-[8rem]"></div>
+          <div
+            style={{
+              height: analyzeHeight6,
+            }}
+            className={`absolute right-[24%] top-[124%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
+          ></div>
+
+          <div className=" absolute left-[50%] bottom-[-24%] border border-b-gray w-[15rem] "></div>
+          <div
+            style={{
+              width: analyzeWidth5,
+            }}
+            className={`absolute left-[50%]  bottom-[-24%] bottom-0 transition-all ease-out duration-1000 border border-b-black`}
+          ></div>
+
+          {/* 
+          <div className=" absolute left-[28%]  bottom-[-24%] border border-b-gray w-[15rem] "></div>
+          <div
+            style={{
+              width: analyzeWidth4,
+            }}
+            className={`absolute left-[28%]  bottom-[-24%] bottom-0 rotate-180 transition-all ease-out duration-1000 border border-b-black`}
+          ></div> */}
+
+          <div className=" absolute right-[50%] bottom-[-24%]  border border-b-gray w-[15.2rem] "></div>
+          <div
+            style={{
+              width: analyzeWidth4,
+            }}
+            className={`absolute right-[50%]  bottom-[-24%] bottom-0 transition-all ease-out duration-1000 border border-b-black`}
+          ></div>
+
+        </div>
+      </div>
+      <div className="flex flex-row justify-between space-x-6">
+        <div className="p-3 border border-black shadow-md shadow-gray-500 rounded-md w-[30rem] h-[22rem] mt-[21.5rem]">
+
+          <p ref={otdRef} className="text-black text-center text-xl p-2 underline">
+            Bail Dislocation Frame
+          </p>
+          {/* @ts-ignore */}
+          {displayImage && <img className="pt-2" src={firstElement?.image} />}
+
+
         </div>
 
-        {/* <div className="w-[24rem] relative h-[24rem] video-upload right p-5 border border-black shadow-md shadow-gray-500 rounded-md">
-          <div>
-            <p className="text-black text-center text-xl underline">
-              Frame of Bails Dislocation
-            </p>
-            <VideoUpload2 setImages2={setImages2} setVideo2Prop={setVideo2} width={700} height={500} />
-          </div>
-          <div className="absolute left-[50%] bottom-[-50%] bottom-0 border border-l-gray h-[12rem]"></div>
-          <div
-            style={{
-              height: analyzeHeight2,
-            }}
-            className={`absolute left-[50%] top-[100%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
-          ></div>
-
-          <div className=" absolute right-[50%] bottom-[-60%] bottom-0 border border-b-gray w-[13rem] "></div>
-          <div
-            style={{
-              width: analyzeWidth2,
-            }}
-            className={`absolute right-[50%]  bottom-[-60%] bottom-0 transition-all ease-out duration-1000 border border-b-black`}
-          ></div>
-        </div> */}
+        <div className="p-3 border border-black shadow-md shadow-gray-500 rounded-md w-[30rem] h-[22rem] mt-[21.5rem]">
+          {/* @ts-ignore */}
+          {/* {displayImage && <img src={firstElement?.image} />} */}
+        </div>
       </div>
 
 
-      <div id="decisonMade" className="flex flex-row justify-center mt-[12rem]">
+      <div id="decisonMade" className="flex flex-row justify-center mt-[16rem]">
         <div className="p-5 border border-black shadow-md shadow-gray-500 rounded-md w-[20rem] h-[20rem]">
           <div>
             {decisionDone && (
