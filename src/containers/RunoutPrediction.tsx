@@ -48,6 +48,11 @@ function RunoutPrediction() {
 
 
 
+  const otRedf1 = useRef(null);
+
+  const isVisibleAnalyze1 = useIsVisible(otRedf1);
+
+
   const [video1, setVideo1] = useState("");
 
   const [video2, setVideo2] = useState("");
@@ -89,6 +94,15 @@ function RunoutPrediction() {
   const [analyzeHeight6, setAnalyzeHeight6] = useState("0");
   const [analyzeWidth5, setAnalyzeWidth5] = useState("0");
   const [analyzeWidth4, setAnalyzeWidth4] = useState("0");
+
+
+  const [analyzeHeight7, setAnalyzeHeight7] = useState("0");
+  const [analyzeHeight8, setAnalyzeHeight8] = useState("0");
+  const [analyzeHeight9, setAnalyzeHeight9] = useState("0");
+  const [analyzeWidth6, setAnalyzeWidth6] = useState("0");
+  const [analyzeWidth61, setAnalyzeWidth61] = useState("0");
+  const [analyzeWidth7, setAnalyzeWidth7] = useState("0");
+
 
   const [firstElement, setFirstElement] = useState({});
 
@@ -185,12 +199,12 @@ function RunoutPrediction() {
             // Authorization: `Bearer ${session.accessToken}`,
           },
           params: {
-            api_key: "tE4xehNIehE5UNy85O6V"
+            api_key: "9dqhyGN5hU3MM5CsYowi"
           },
           // withCredentials: true,
         };
         const res = await axios.post(
-          `https://detect.roboflow.com/bail-watch-2/1`,
+          `https://detect.roboflow.com/bail-watch/1`,
           //@ts-ignore
           imagea.imageData,
           customConfig
@@ -305,6 +319,32 @@ function RunoutPrediction() {
       }, 9000);
     }
   }, [isVisibleAnalyze]);
+
+
+  useEffect(() => {
+
+    if (isVisibleAnalyze1) {
+      setTimeout(() => {
+        setAnalyzeHeight7("25%");
+      }, 1000);
+      setTimeout(() => {
+        setAnalyzeWidth6("24.8%");
+        setAnalyzeWidth61("26.8%");
+      }, 2000);
+      setTimeout(() => {
+        setAnalyzeHeight8("12%");
+      }, 3000);
+
+
+      setTimeout(() => {
+        setAnalyzeWidth7("25.8%");
+      }, 8000);
+
+      setTimeout(() => {
+        setAnalyzeHeight9("13.4%");
+      }, 9000);
+    }
+  }, [isVisibleAnalyze1]);
 
 
   console.log('first element : ', firstElement)
@@ -487,8 +527,15 @@ function RunoutPrediction() {
           ></div>
 
         </div>
+
+
+
+
+
+
+
       </div>
-      <div className="flex flex-row justify-between space-x-6">
+      <div className="flex flex-row justify-between space-x-6 relative">
         <div className="p-3 border border-black shadow-md shadow-gray-500 rounded-md w-[30rem] h-[22rem] mt-[21.5rem]">
 
           <p ref={otdRef} className="text-black text-center text-xl p-2 underline">
@@ -504,7 +551,83 @@ function RunoutPrediction() {
           {/* @ts-ignore */}
           {/* {displayImage && <img src={firstElement?.image} />} */}
         </div>
+
+
+        <div className="absolute left-[22%] bottom-[-25%] border border-l-gray h-[10.5rem]"></div>
+        <div
+          style={{
+
+            height: analyzeHeight7,
+          }}
+          className={`absolute left-[22%] top-[100%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
+        ></div>
+
+
+        <div className="absolute left-[47.5%] bottom-[-36.5%] border border-l-gray h-[5rem]"></div>
+        <div
+          style={{
+
+            height: analyzeHeight8,
+          }}
+          className={`absolute left-[47.5%] top-[124.5%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
+        ></div>
+
+
+
+        {/* <div className="absolute right-[24%] bottom-[-37.5%] border border-l-gray h-[8rem]"></div>
+        <div
+          style={{
+            height: analyzeHeight8,
+          }}
+          className={`absolute right-[24%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
+        ></div> */}
+
+
+
+        <div className=" absolute left-[22%] bottom-[-25%] border border-b-gray w-[15rem] "></div>
+        <div
+          style={{
+            width: analyzeWidth61,
+          }}
+          className={`absolute left-[22%]  bottom-[-25%] bottom-0 transition-all ease-out duration-1000 border border-b-black`}
+        ></div>
+
+
+        <div className="absolute left-[72%] bottom-[-25%] border border-l-gray h-[10.5rem]"></div>
+        <div
+          style={{
+
+            height: analyzeHeight7,
+          }}
+          className={`absolute left-[72%] top-[100%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
+        ></div>
+
+
+        <div className=" absolute right-[25.2%] bottom-[-25%]  border border-b-gray w-[14.4rem] "></div>
+        <div
+
+          style={{
+            width: analyzeWidth6,
+          }}
+          className={`absolute right-[25.2%]  bottom-[-25%] bottom-0 transition-all ease-out duration-1000 border border-b-black`}
+        ></div>
+
+
+
+        {/* 
+          <div className=" absolute left-[28%]  bottom-[-24%] border border-b-gray w-[15rem] "></div>
+          <div
+            style={{
+              width: analyzeWidth4,
+            }}
+            className={`absolute left-[28%]  bottom-[-24%] bottom-0 rotate-180 transition-all ease-out duration-1000 border border-b-black`}
+          ></div> */}
+
+
       </div>
+
+
+
 
 
       <div id="decisonMade" className="flex flex-row justify-center mt-[16rem]">
@@ -542,11 +665,7 @@ function RunoutPrediction() {
           </div>
         )}
       </div> */}
-
-
-
-
-      <div>
+      <div ref={otRedf1}>
         <Footer />
         {/* @ts-ignore */}
       </div>

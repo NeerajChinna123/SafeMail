@@ -10,20 +10,20 @@ export const ImageWithBoundingBox = (props: any) => {
         position: 'absolute',
         border: '2px solid red',
         // Using the first prediction for demonstration
-        left: apiCallresponse?.predictions[0].x / 5.3 + 'px',
-        top: apiCallresponse?.predictions[0].y / 6.6 + 'px',
-        width: apiCallresponse?.predictions[0].width / 4.8 + 'px',
-        height: apiCallresponse?.predictions[0].height / 4.8 + 'px'
+        left: apiCallresponse?.predictions[0]?.x / 5.09 + 'px',
+        top: apiCallresponse?.predictions[0]?.y / 6.2 + 'px',
+        width: apiCallresponse?.predictions[0]?.width / 4.8 + 'px',
+        height: apiCallresponse?.predictions[0]?.height / 4.8 + 'px'
     };
 
     const boxStyle1 = {
         position: 'absolute',
         border: '2px solid blue',
         // Using the first prediction for demonstration
-        left: apiCallresponse?.predictions[0].x / 5.3 + 'px',
-        top: apiCallresponse?.predictions[0].y / 6.6 + 'px',
-        width: apiCallresponse?.predictions[0].width / 4.8 + 'px',
-        height: apiCallresponse?.predictions[0].height / 4.8 + 'px'
+        left: apiCallresponse?.predictions[0]?.x / 5 + 'px',
+        top: apiCallresponse?.predictions[0]?.y / 6.2 + 'px',
+        width: apiCallresponse?.predictions[0]?.width / 4.8 + 'px',
+        height: apiCallresponse?.predictions[0]?.height / 4.8 + 'px'
     };
 
     const confidence1 = {
@@ -38,8 +38,6 @@ export const ImageWithBoundingBox = (props: any) => {
     };
 
     const confidence2 = {
-
-
         // Using the first prediction for demonstration
 
         width: '200px',
@@ -55,7 +53,7 @@ export const ImageWithBoundingBox = (props: any) => {
                 <div style={apiCallresponse?.predictions[0]?.class_id == 0 ? boxStyle : boxStyle1}></div>
 
             </div>
-            <div className="font-bold p-1 text-center rounded-md" style={apiCallresponse?.predictions[0]?.class_id == 0 ? confidence1 : confidence2}>{apiCallresponse?.predictions[0]?.confidence * 110}  % </div>
+            <div className="font-bold p-1 text-center rounded-md" style={apiCallresponse?.predictions[0]?.class_id == 0 ? confidence1 : confidence2}>{apiCallresponse?.predictions[0]?.confidence * 120}  % </div>
         </>
     );
 };
