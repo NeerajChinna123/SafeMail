@@ -3,10 +3,15 @@ import React from "react";
 import VideoUpload from "../components/VideoUpload";
 import VideoUpload2 from "../components/VideoUpload2";
 import animationData from "../../public/out.json";
+import animationData2 from "../../public/not-out.json";
 import Lottie from "react-lottie-player";
 import { mqttClient } from ".././../awsMqttClient";
 import axios from "axios";
 import { ImageWithBoundingBox } from "../components/ImageWithBoundingBox";
+import { ImageWithBoundingBox2 } from "../components/ImageWithBoundinBox2";
+import { ImageWithBoundingBox3 } from "../components/ImageWithBoundingBox3";
+import { ImageWithBoundingBox4 } from "../components/ImageWithBoundingBox4";
+import { ImageWithBoundingBox5 } from "../components/ImageWithBoundingBox5";
 import Footer from "./Footer";
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion'
 
@@ -65,15 +70,12 @@ function RunoutPrediction() {
 
   const [roboFlowApiCall, setRoboFlowApiCall] = useState([]);
 
+  const [roboFlowApiCall1, setRoboFlowApiCall1] = useState([]);
+
+
+  const [roboFlowApiCall2, setRoboFlowApiCall2] = useState([]);
 
   const [displayText, setDisplayText] = useState('Extracting Frames: Please wait, preparing video for analysis.')
-
-
-  console.log('image frames  : ', images2);
-  console.log("video1 length", video1.length > 0);
-
-
-  console.log('is visible analyze : ', isVisibleAnalyze)
 
   const [analyzeHeight, setAnalyzeHeight] = useState("0");
   const [analyzeWidth, setAnalyzeWidth] = useState("0");
@@ -103,10 +105,31 @@ function RunoutPrediction() {
   const [analyzeWidth61, setAnalyzeWidth61] = useState("0");
   const [analyzeWidth7, setAnalyzeWidth7] = useState("0");
 
+  const [finalDecision, setFinalDecision] = useState("");
+
 
   const [firstElement, setFirstElement] = useState({});
 
+  const [creaseElement, setCreaseElement] = useState({});
+
   const [displayImage, setDisplayImage] = useState(false);
+
+  const [displayImage2, setDisplayImage2] = useState(false);
+
+  const [displayImage3, setDisplayImage3] = useState(false);
+
+
+  const [displayText1, setDisplayText1] = useState('Detecting Crease-line');
+
+  const [detectCrease, setDetectCrease] = useState(false);
+
+
+  const [detectBat, setDetectBat] = useState(false);
+
+
+  const [decisionPending, setDecisionPending] = useState(false);
+
+  const [decisionPending1, setDecisionPending1] = useState(false);
 
 
   if (video1.length > 0) {
@@ -143,44 +166,6 @@ function RunoutPrediction() {
     setClicked(true);
     window.location.href = "#Frames";
     //@ts-ignore
-    console.log('image-data : ', images2[0].imageData)
-
-    //   const customConfig = {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       // @ts-ignore
-    //       // Authorization: `Bearer ${session.accessToken}`,
-
-    //     },
-    //     withCredentials: true,
-    //   };
-
-    //   try {
-    //     const res = await axios.post(
-    //       `http://localhost:8000/detect`, 
-    //       {},
-    //       customConfig
-    //     );
-    //     //@ts-ignore
-    //     if (res?.status < "300") {
-    //       setTimeout(() => {
-    //         setDecisionMade(res.decision);
-    //         setAnalyzeHeight3(190);
-    //         setClicked(false);
-    //       }, 6000);
-    //     } else {
-    //       //@ts-ignore
-    //     }
-    //     // Work with the response...
-    //   } catch (err) {
-    //     // Handle error
-    //     console.log('error : ',err)
-    //     //@ts-ignore
-
-    //   }
-    // };
-
-
     setTimeout(() => {
       setDisplayText('Analyzing Frames: Detecting bail dislocation...');
     }, 10000);
@@ -190,8 +175,6 @@ function RunoutPrediction() {
     for (const image in images2) {
       const imagea = images2[image]
       try {
-
-
         const customConfig = {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -199,7 +182,7 @@ function RunoutPrediction() {
             // Authorization: `Bearer ${session.accessToken}`,
           },
           params: {
-            api_key: "9dqhyGN5hU3MM5CsYowi"
+            api_key: process.env.NEXT_PUBLIC_ROBOFLOW_API
           },
           // withCredentials: true,
         };
@@ -242,10 +225,6 @@ function RunoutPrediction() {
 
       //@ts-ignore
       setRoboFlowApiCall(tempArray);
-
-      console.log('identifying the temporary array : ', tempArray);
-
-      console.log('identify the first element : ', tempArray.find(item => item?.apiCallresponse?.predictions[0]?.class_id === 0));
       const firstClassZeroElement = tempArray.find(item => item?.apiCallresponse?.predictions[0]?.class_id === 0);
       //@ts-ignore
       setFirstElement(firstClassZeroElement);
@@ -262,37 +241,147 @@ function RunoutPrediction() {
   };
 
 
-  //   // Define your API endpoint
-  //   const API_ENDPOINT = 'http://localhost:8000/detect';
 
-  //   // Set up the headers, if you have any. For a GET request, headers are often not needed.
-  //   const headers = {
-  //     'Content-Type': 'application/json',
-  //     // ... any other headers
-  //   };
+  const DetectingCreaseLine = async () => {
 
-  //   // Use axios to make the GET request
-  //   axios.get(API_ENDPOINT, { headers })
-  //     //@ts-ignore
-  //     .then(response => {
-  //       // Handle the response here
-  //       setTimeout(() => {
-  //         setDecisionMade(response.decision);
-  //         setAnalyzeHeight3(190);
-  //         setClicked(false);
-  //       }, 6000);
-  //     })
-  //     //@ts-ignore
-  //     .catch(error => {
-  //       // Handle the error here
-  //       console.error('There was an error!', error.response);
-  //     });
-  // }
-  // if (analyzeHeight3) {
-  //   setTimeout(() => {
-  //     setDecisionDone(true);
-  //   }, 1000);
-  // }
+    //@ts-ignore
+
+    const tempArray1 = [firstElement];
+
+    try {
+      const customConfig = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+          // @ts-ignore
+          // Authorization: `Bearer ${session.accessToken}`,
+        },
+        params: {
+          api_key: process.env.NEXT_PUBLIC_ROBOFLOW_API,
+          confidence: 22
+        },
+        // withCredentials: true,
+      };
+      const res = await axios.post(
+        `https://detect.roboflow.com/crease-line-detection/3`,
+        //@ts-ignore
+        firstElement?.image,
+        customConfig
+      );
+      //@ts-ignore
+      if (res?.status < "300") {
+        const response = {
+          //@ts-ignore
+          frameNumber: firstElement?.frameNumber,
+          //@ts-ignore
+          image: firstElement?.image,
+          //@ts-ignore
+          apiCallresponse: res.data
+        }
+        tempArray1.push(response);
+      } else {
+        //@ts-ignore
+      }
+
+      // Work with the response...
+    } catch (err) {
+      // Handle error
+      console.log('error : ', err)
+      //@ts-ignore
+    }
+
+    setTimeout(() => {
+
+      //@ts-ignore
+
+      //@ts-ignore
+
+      //@ts-ignore
+      console.log('identifying the temporary array1 : ', tempArray1);
+      //@ts-ignore
+
+      //@ts-ignore
+      setCreaseElement(tempArray1);
+      //@ts-ignore
+      setRoboFlowApiCall1(tempArray1);
+      //@ts-ignore
+      setRoboFlowApiCall2(tempArray1);
+
+      setDetectCrease(false);
+      setDisplayImage2(true);
+
+
+
+      setTimeout(() => {
+        setDetectBat(true);
+        //@ts-ignore
+        DetectingBat(tempArray1);
+      }, 10000);
+
+    }, 3000);
+  }
+
+
+  const DetectingBat = async (tempArray1: any) => {
+    //@ts-ignore
+    setDisplayText1('Detecting Bat');
+    //@ts-ignore
+    const tempArray4 = [];
+
+    try {
+      const customConfig = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+          // @ts-ignore
+          // Authorization: `Bearer ${session.accessToken}`,
+        },
+        params: {
+          api_key: process.env.NEXT_PUBLIC_ROBOFLOW_API
+        },
+        // withCredentials: true,
+      };
+      const res = await axios.post(
+        `https://detect.roboflow.com/bat-detection-2.0/2`,
+        //@ts-ignore
+        firstElement?.image,
+        customConfig
+      );
+      //@ts-ignore
+      if (res?.status < "300") {
+        const response = {
+          //@ts-ignore
+          frameNumber: firstElement?.frameNumber,
+          //@ts-ignore
+          image: firstElement?.image,
+          //@ts-ignore
+          apiCallresponse: res.data
+        }
+        tempArray4.push(response);
+      } else {
+        //@ts-ignore
+      }
+
+      // Work with the response...
+    } catch (err) {
+      // Handle error
+      console.log('error : ', err)
+      //@ts-ignore
+    }
+
+    setTimeout(() => {
+      //@ts-ignore
+      const tempArray3 = tempArray1?.push(tempArray4[0]);
+
+
+      //@ts-ignore
+      setRoboFlowApiCall2(tempArray1);
+      setDetectBat(false);
+      setDisplayImage2(false);
+      setDisplayImage3(true);
+
+
+    }, 3000);
+  }
+
 
   useEffect(() => {
 
@@ -317,8 +406,16 @@ function RunoutPrediction() {
       setTimeout(() => {
         setAnalyzeHeight6("13.4%");
       }, 9000);
+
+      setTimeout(() => {
+        if (roboFlowApiCall1.length == 0) {
+          setDetectCrease(true);
+          DetectingCreaseLine();
+        }
+      }, 10000);
     }
   }, [isVisibleAnalyze]);
+
 
 
   useEffect(() => {
@@ -343,46 +440,68 @@ function RunoutPrediction() {
       setTimeout(() => {
         setAnalyzeHeight9("13.4%");
       }, 9000);
+
+      setTimeout(() => {
+        setDecisionPending(true);
+      }, 4000);
+
     }
   }, [isVisibleAnalyze1]);
+  //@ts-ignore
+
+  const sendDecision = async () => {
+    const customConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        // @ts-ignore
+        // Authorization: `Bearer ${session.accessToken}`,
+
+      },
+      withCredentials: true,
+      params: {
+        decision: finalDecision
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        `http://localhost:8000/detect`,
+        {},
+        customConfig
+      );
+      //@ts-ignore
+      if (res?.status < "300") {
+        console.log('res', res)
+      } else {
+        //@ts-ignore
+      }
+      // Work with the response...
+    } catch (err) {
+      // Handle error
+      console.log('error : ', err)
+      //@ts-ignore
+
+    }
+  }
 
 
-  console.log('first element : ', firstElement)
+  console.log('prediction-d', firstElement)
 
+  useEffect(() => {
+    if (finalDecision.length > 0 && finalDecision != "") {
+      sendDecision();
+    }
+  }, [finalDecision]);
 
   return (
     <div className="px-3 mt-[3rem] lg:mt-[6rem]  max-w-[60rem]  mx-auto min-h-screen">
       <div id="runOutPred" className="flex flex-row justify-center">
-        {/* <div className="w-[24rem] relative video-upload left h-[24rem] p-5 border border-black shadow-md shadow-gray-500 rounded-md">
-          <div>
-            <p className="text-black text-center text-xl underline">
-              Upload a video showing the batsman&apos;s angle
-            </p>
-            <VideoUpload setImages1={setImages} setVideo1Prop={setVideo1} width={700} height={500} />
-          </div>
-          <div className="absolute left-[50%] bottom-[-60%] bottom-0 border border-l-gray h-[14rem]"></div>
-          <div
-            style={{
-              height: analyzeHeight,
-            }}
-            className={`absolute left-[50%] top-[100%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
-          ></div>
-
-          <div className=" absolute left-[50%] bottom-[-60%] bottom-0 border border-b-gray w-[13rem] "></div>
-          <div
-            style={{
-              width: analyzeWidth,
-            }}
-            className={`absolute left-[50%]  bottom-[-60%] bottom-0 transition-all ease-out duration-1000 border border-b-black`}
-          ></div>
-        </div> */}
-
         <div className="w-[24rem] relative h-[24rem] video-upload right p-5 border border-black shadow-md shadow-gray-500 rounded-md">
           <div>
             <p className="text-black text-center text-xl underline">
-              Upload a video showing the side angle
+              Upload a Video Showing the Side Angle of a Cricket Run Out
             </p>
-            <VideoUpload2 setImages2={setImages2} setVideo2Prop={setVideo2} width={700} height={500} />
+            <VideoUpload2 setImages2={setImages2} setVideo2Prop={setVideo2} width={700} height={800} />
           </div>
           <div className="absolute left-[50%] bottom-[-50%] bottom-0 border border-l-gray h-[12rem]"></div>
           <div
@@ -466,8 +585,7 @@ function RunoutPrediction() {
                 transition={animationTransition} className="grid grid-cols-3 gap-5 space-x-2 justify-center px-6">
 
                 {roboFlowApiCall.length > 0 && roboFlowApiCall?.map((roboFlow: any) => (
-                  <div className="mb-4">
-
+                  <div key={roboFlow?.apiCallresponse?.predictions[0]?.x} className="mb-4">
                     <ImageWithBoundingBox data={roboFlow} />
                   </div>
                 ))}
@@ -508,16 +626,6 @@ function RunoutPrediction() {
             }}
             className={`absolute left-[50%]  bottom-[-24%] bottom-0 transition-all ease-out duration-1000 border border-b-black`}
           ></div>
-
-          {/* 
-          <div className=" absolute left-[28%]  bottom-[-24%] border border-b-gray w-[15rem] "></div>
-          <div
-            style={{
-              width: analyzeWidth4,
-            }}
-            className={`absolute left-[28%]  bottom-[-24%] bottom-0 rotate-180 transition-all ease-out duration-1000 border border-b-black`}
-          ></div> */}
-
           <div className=" absolute right-[50%] bottom-[-24%]  border border-b-gray w-[15.2rem] "></div>
           <div
             style={{
@@ -525,13 +633,7 @@ function RunoutPrediction() {
             }}
             className={`absolute right-[50%]  bottom-[-24%] bottom-0 transition-all ease-out duration-1000 border border-b-black`}
           ></div>
-
         </div>
-
-
-
-
-
 
 
       </div>
@@ -542,21 +644,39 @@ function RunoutPrediction() {
             Bail Dislocation Frame
           </p>
           {/* @ts-ignore */}
-          {displayImage && <img className="pt-2" src={firstElement?.image} />}
-
-
+          {displayImage &&
+            <ImageWithBoundingBox5 data={firstElement} />
+          }
         </div>
 
         <div className="p-3 border border-black shadow-md shadow-gray-500 rounded-md w-[30rem] h-[22rem] mt-[21.5rem]">
           {/* @ts-ignore */}
           {/* {displayImage && <img src={firstElement?.image} />} */}
+          <p ref={otdRef} className="text-black text-center text-xl p-2 underline">
+            Crease-line and Bat detection
+          </p>
+          {(detectCrease || detectBat) && <p className="text-black text-center text-xl animate-pulse py-24">{displayText1 + " ..."}</p>}
+          {(displayImage2 && !detectBat) && <div className="mb-4">
+            {roboFlowApiCall1.length > 0 &&
+              <ImageWithBoundingBox2 data={roboFlowApiCall1} />
+
+            }
+          </div>}
+
+
+          {displayImage3 && <div className="mb-4">
+            {/* @ts-ignore */}
+            {roboFlowApiCall2 && roboFlowApiCall2[0]?.frameNumber === 2 ?
+              <ImageWithBoundingBox4 data={roboFlowApiCall2} setFinalDecision1={setFinalDecision} />
+              : <ImageWithBoundingBox3 data={roboFlowApiCall2} setFinalDecision1={setFinalDecision} />
+            }
+          </div>}
         </div>
 
 
         <div className="absolute left-[22%] bottom-[-25%] border border-l-gray h-[10.5rem]"></div>
         <div
           style={{
-
             height: analyzeHeight7,
           }}
           className={`absolute left-[22%] top-[100%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
@@ -566,23 +686,10 @@ function RunoutPrediction() {
         <div className="absolute left-[47.5%] bottom-[-36.5%] border border-l-gray h-[5rem]"></div>
         <div
           style={{
-
             height: analyzeHeight8,
           }}
           className={`absolute left-[47.5%] top-[124.5%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
         ></div>
-
-
-
-        {/* <div className="absolute right-[24%] bottom-[-37.5%] border border-l-gray h-[8rem]"></div>
-        <div
-          style={{
-            height: analyzeHeight8,
-          }}
-          className={`absolute right-[24%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
-        ></div> */}
-
-
 
         <div className=" absolute left-[22%] bottom-[-25%] border border-b-gray w-[15rem] "></div>
         <div
@@ -596,7 +703,6 @@ function RunoutPrediction() {
         <div className="absolute left-[72%] bottom-[-25%] border border-l-gray h-[10.5rem]"></div>
         <div
           style={{
-
             height: analyzeHeight7,
           }}
           className={`absolute left-[72%] top-[100%] transition-all ease-out duration-1000 rotate-180 border border-l-black`}
@@ -605,66 +711,30 @@ function RunoutPrediction() {
 
         <div className=" absolute right-[25.2%] bottom-[-25%]  border border-b-gray w-[14.4rem] "></div>
         <div
-
           style={{
             width: analyzeWidth6,
           }}
           className={`absolute right-[25.2%]  bottom-[-25%] bottom-0 transition-all ease-out duration-1000 border border-b-black`}
         ></div>
-
-
-
-        {/* 
-          <div className=" absolute left-[28%]  bottom-[-24%] border border-b-gray w-[15rem] "></div>
-          <div
-            style={{
-              width: analyzeWidth4,
-            }}
-            className={`absolute left-[28%]  bottom-[-24%] bottom-0 rotate-180 transition-all ease-out duration-1000 border border-b-black`}
-          ></div> */}
-
-
       </div>
-
-
-
-
 
       <div id="decisonMade" className="flex flex-row justify-center mt-[16rem]">
         <div className="p-5 border border-black shadow-md shadow-gray-500 rounded-md w-[20rem] h-[20rem]">
           <div>
-            {decisionDone && (
+            {decisionPending && (
               <Lottie
                 loop
-                animationData={animationData}
+                animationData={finalDecision == 'Out' ? animationData : animationData2}
                 play
                 className="w-[18rem] h-[18rem]"
               />
-            )}
+            )
+
+            }
           </div>
         </div>
       </div>
 
-      {/* <div>
-        {images2?.length > 0 && (
-          <div className="output">
-            {images2.map((imageUrl, index) => (
-              <a
-                //@ts-ignore
-                key={imageUrl.imageData}
-                //@ts-ignore
-                href={imageUrl.imageData}
-              // download={`${now}-${index + 1}.png`}
-              >
-
-                <img
-                  //@ts-ignore
-                  src={imageUrl.imageData} alt="" />
-              </a>
-            ))}
-          </div>
-        )}
-      </div> */}
       <div ref={otRedf1}>
         <Footer />
         {/* @ts-ignore */}
