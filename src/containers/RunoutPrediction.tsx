@@ -385,7 +385,7 @@ function RunoutPrediction() {
 
   useEffect(() => {
 
-    if (isVisibleAnalyze) {
+    if (isVisibleAnalyze && Object.keys(firstElement).length>0) {
       setTimeout(() => {
         setAnalyzeHeight4("24%");
       }, 1000);
@@ -420,7 +420,7 @@ function RunoutPrediction() {
 
   useEffect(() => {
 
-    if (isVisibleAnalyze1) {
+    if (isVisibleAnalyze1 && Object.keys(firstElement).length>0) {
       setTimeout(() => {
         setAnalyzeHeight7("25%");
       }, 1000);
@@ -644,7 +644,7 @@ function RunoutPrediction() {
             Bail Dislocation Frame
           </p>
           {/* @ts-ignore */}
-          {displayImage &&
+          {(displayImage && Object.keys(firstElement).length>0) &&
             <ImageWithBoundingBox5 data={firstElement} />
           }
         </div>
