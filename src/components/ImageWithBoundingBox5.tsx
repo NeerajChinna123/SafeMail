@@ -31,6 +31,7 @@ export const ImageWithBoundingBox5 = (props: any) => {
         <>
             <div style={{ position: 'relative', width: apiCallresponse?.image.width / 3, height: apiCallresponse?.image.height / 3 }}>
                 <img src={image} alt="Analyzed" />
+                 {/* @ts-ignore */}
                 <div style={boxStyle}></div>
 
             </div>

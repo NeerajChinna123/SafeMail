@@ -36,7 +36,7 @@ function Banner(props: propsData) {
         </div>
         <div className="md:w-[95%] px-8 md:px-[6rem] lg:px-0">
           <p className="text-[rgba(239,247,255,.615)] font-inter md:text-xl text-slate-700 text-[1.4rem] text-center lg:text-start md:leading-[2rem]">
-             Get quick and accurate runout decisions in cricket with Smart Umpire. Our web app uses two angles to make sure every call is correct, helping the game go on without long waits.
+          Get quick and accurate runout decisions in cricket with Smart Umpire, our web app that utilizes a side-angle view to ensure every call is precise, streamlining the game by significantly reducing delays.
           </p>
         </div>
         <motion.a

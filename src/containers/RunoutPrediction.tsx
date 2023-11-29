@@ -408,7 +408,7 @@ function RunoutPrediction() {
       }, 9000);
 
       setTimeout(() => {
-        if (roboFlowApiCall1.length == 0) {
+        if (roboFlowApiCall1.length == 0 && Object.keys(firstElement).length>0 ) {
           setDetectCrease(true);
           DetectingCreaseLine();
         }
@@ -656,7 +656,7 @@ function RunoutPrediction() {
             Crease-line and Bat detection
           </p>
           {(detectCrease || detectBat) && <p className="text-black text-center text-xl animate-pulse py-24">{displayText1 + " ..."}</p>}
-          {(displayImage2 && !detectBat) && <div className="mb-4">
+          {(displayImage2 && !detectBat && Object.keys(firstElement).length>0) && <div className="mb-4">
             {roboFlowApiCall1.length > 0 &&
               <ImageWithBoundingBox2 data={roboFlowApiCall1} />
 
@@ -721,7 +721,7 @@ function RunoutPrediction() {
       <div id="decisonMade" className="flex flex-row justify-center mt-[16rem]">
         <div className="p-5 border border-black shadow-md shadow-gray-500 rounded-md w-[20rem] h-[20rem]">
           <div>
-            {decisionPending && (
+            {(decisionPending && Object.keys(firstElement).length>0 && roboFlowApiCall2) && (
               <Lottie
                 loop
                 animationData={finalDecision == 'Out' ? animationData : animationData2}
