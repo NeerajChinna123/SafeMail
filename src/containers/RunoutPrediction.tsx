@@ -254,6 +254,7 @@ function RunoutPrediction() {
           "Content-Type": "application/x-www-form-urlencoded"
           // @ts-ignore
           // Authorization: `Bearer ${session.accessToken}`,
+
         },
         params: {
           api_key: process.env.NEXT_PUBLIC_ROBOFLOW_API,
@@ -420,7 +421,7 @@ function RunoutPrediction() {
 
   useEffect(() => {
 
-    if (isVisibleAnalyze1 && Object.keys(firstElement).length>0) {
+    if (isVisibleAnalyze1 && Object.keys(firstElement).length>0 && roboFlowApiCall2.length>2) {
       setTimeout(() => {
         setAnalyzeHeight7("25%");
       }, 1000);
@@ -450,42 +451,63 @@ function RunoutPrediction() {
   //@ts-ignore
 
   const sendDecision = async () => {
+    console.log('sending decision ...')
     const customConfig = {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // @ts-ignore
         // Authorization: `Bearer ${session.accessToken}`,
 
       },
-      withCredentials: true,
-      params: {
-        decision: finalDecision
-      },
+      withCredentials: false,
     };
 
     try {
-      const res = await axios.post(
-        `http://localhost:8000/detect`,
-        {},
-        customConfig
-      );
+      const res = await axios.post(`http://localhost:8001/detect`, { decision: finalDecision }, customConfig);
       //@ts-ignore
       if (res?.status < "300") {
         console.log('res', res)
       } else {
         //@ts-ignore
+        console.log('res', res)
       }
       // Work with the response...
     } catch (err) {
       // Handle error
       console.log('error : ', err)
       //@ts-ignore
-
+      
     }
+
+    // const url = 'http://localhost:8001/detect';
+    // const payload = {
+    //     decision: finalDecision,
+    //     // other data
+    // };
+
+    // try {
+    //     const response = await fetch(url, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             // Additional headers if needed
+    //         },
+    //         body: JSON.stringify(payload)
+    //     });
+
+    //     if (!response.ok) {
+    //         throw new Error(`HTTP error! status: ${response.status}`);
+    //     }
+
+    //     const data = await response.json();
+    //     console.log(data);
+    //     // Handle the response data
+    // } catch (error) {
+    //     console.error('Error:', error);
+    //     // Handle errors
+    // }
+    
   }
-
-
-  console.log('prediction-d', firstElement)
 
   useEffect(() => {
     if (finalDecision.length > 0 && finalDecision != "") {
@@ -571,8 +593,6 @@ function RunoutPrediction() {
           className={`transition-all ease-out duration-1000 rotate-180 border h-[9rem] border-l-black`}
         ></div>
       </div>
-
-
 
       <div id="runOutPred" className="flex flex-row justify-center mt-[0rem]">
         <div className="w-[100rem] relative video-upload  left h-[58rem] p-0 border border-black shadow-md shadow-gray-500 rounded-md">
@@ -721,7 +741,7 @@ function RunoutPrediction() {
       <div id="decisonMade" className="flex flex-row justify-center mt-[16rem]">
         <div className="p-5 border border-black shadow-md shadow-gray-500 rounded-md w-[20rem] h-[20rem]">
           <div>
-            {(decisionPending && Object.keys(firstElement).length>0 && roboFlowApiCall2) && (
+            {(decisionPending && Object.keys(firstElement).length>0 && roboFlowApiCall2.length>2) && (
               <Lottie
                 loop
                 animationData={finalDecision == 'Out' ? animationData : animationData2}
