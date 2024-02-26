@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { color } from '../../node_modules/framer-motion/dist/index';
+import { color } from 'framer-motion/dist';
 
 export const ImageWithBoundingBox5 = (props: any) => {
     const { frameNumber, image, apiCallresponse } = props?.data;

@@ -5,7 +5,7 @@ import VideoUpload2 from "../components/VideoUpload2";
 import animationData from "../../public/out.json";
 import animationData2 from "../../public/not-out.json";
 import Lottie from "react-lottie-player";
-import { mqttClient } from ".././../awsMqttClient";
+import { mqttClient } from "../../awsMqttClient";
 import axios from "axios";
 import { ImageWithBoundingBox } from "../components/ImageWithBoundingBox";
 import { ImageWithBoundingBox2 } from "../components/ImageWithBoundinBox2";

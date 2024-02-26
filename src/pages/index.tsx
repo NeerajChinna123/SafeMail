@@ -28,19 +28,19 @@ const Main = (props: propsData) => {
       <main className="bg-white min-h-screen">
         {/* @ts-ignore */}
         <div className="">
-          <Header />
+          {/* <Header /> */}
           {/* @ts-ignore */}
         </div>
         {/* @ts-ignore */}
         <div className="">
-          <Banner bannerData={props?.banner} />
+          {/* <Banner bannerData={props?.banner} /> */}
           {/* <PersonalAiTrainer fitZone={props?.fitZone}  /> */}
           {/* @ts-ignore */}
         </div>
         {/* @ts-ignore */}
         <div>
           {/* @ts-ignore */}
-          <RunoutPrediction />
+          {/* <RunoutPrediction /> */}
           {/* @ts-ignore */}
         </div>
         {/* @ts-ignore */}

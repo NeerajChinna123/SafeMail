@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
-import { VideoToFrames, VideoToFramesMethod } from "../components/VideoToFrames";
+import { VideoToFrames, VideoToFramesMethod } from "./VideoToFrames";
 
 export default function VideoUpload(props) {
     const { width, height } = props;
