@@ -1,10 +1,6 @@
-import Header from "@/components/Header";
-import Banner from "@/containers/Banner";
+
 import AfterEffectsVideo from "../components/AfterEffects";
 import { BannerType, FitZoneType } from "../../typings";
-import Nav from "@/components/Nav";
-import RunoutPrediction from "@/containers/RunoutPrediction";
-import Footer from "@/containers/Footer";
 
 export interface propsData {
   banner: [BannerType];
