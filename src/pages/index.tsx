@@ -22,6 +22,11 @@ const Main = (props: propsData) => {
       </div>
       {/* @ts-ignore */}
       <main className="bg-white min-h-screen">
+
+        <div className="max-w-7xl mx-auto mt-[4rem] h-screen border border-solid-800 rounded-lg shadow shadow-md shadow-gray-400">
+ok ok 
+
+        </div>
         {/* @ts-ignore */}
         <div className="">
           {/* <Header /> */}
