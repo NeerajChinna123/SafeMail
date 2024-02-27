@@ -1,11 +1,12 @@
 
 import AfterEffectsVideo from "../components/AfterEffects";
 import { BannerType, FitZoneType } from "../../typings";
-import { EllipsisHorizontalCircleIcon, PlusCircleIcon, PlusIcon } from '@heroicons/react/24/outline'
-import { UserPlusIcon, EnvelopeIcon, PhoneIcon, ChatBubbleLeftEllipsisIcon, ShieldExclamationIcon, BoltIcon, AtSymbolIcon } from '@heroicons/react/24/solid'
+import { Cog6ToothIcon, EllipsisHorizontalCircleIcon, GifIcon, PlusCircleIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { UserPlusIcon, EnvelopeIcon, PhoneIcon, ChatBubbleLeftEllipsisIcon, ShieldExclamationIcon, BoltIcon, AtSymbolIcon, QuestionMarkCircleIcon, Cog8ToothIcon, GiftTopIcon } from '@heroicons/react/24/solid'
 import { useScroll } from "framer-motion";
 import { useState } from "react";
 import { motion } from 'framer-motion'
+import { ClockIcon } from "@heroicons/react/24/solid";
 
 
 export interface propsData {
@@ -120,6 +121,40 @@ const Main = (props: propsData) => {
                     <BoltIcon className={currentNav1 == 'Entertainment' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
                     <p className={currentNav1 == 'Entertainment' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Entertainment</p>
                   </div>
+                </div>
+
+                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-full  absolute top-[39rem]">
+
+                </div>
+
+                <div className=" flex flex-col space-y-5 pl-12 mt-[3rem] w-full">
+
+                  <div onClick={() => setCurrentNav1('Entertainment')} className={currentNav1 == 'Entertainment' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black mt-[-1rem] rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
+                    <GiftTopIcon className={currentNav1 == 'Entertainment' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
+                    <p className={currentNav1 == 'Entertainment' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Invites</p>
+                  </div>
+
+                  <div onClick={() => setCurrentNav1('Entertainment')} className={currentNav1 == 'Entertainment' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black  rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
+                    <Cog8ToothIcon className={currentNav1 == 'Entertainment' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
+                    <p className={currentNav1 == 'Entertainment' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Account & Settings</p>
+                  </div>
+
+
+                  <div onClick={() => setCurrentNav1('Entertainment')} className={currentNav1 == 'Entertainment' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
+                    <QuestionMarkCircleIcon className={currentNav1 == 'Entertainment' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
+                    <p className={currentNav1 == 'Entertainment' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Help</p>
+                  </div>
+                </div>
+
+                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-full  absolute top-[49rem]">
+
+                </div>
+
+                <div className=" flex flex-col space-y-5 pl-12 mt-[3rem] w-full">
+
+                 <div className="flex flex-row space-x-3">
+                    
+                 </div>
                 </div>
               </div>
             </div>
