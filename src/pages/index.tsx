@@ -1,7 +1,7 @@
 
 import AfterEffectsVideo from "../components/AfterEffects";
 import { BannerType, FitZoneType } from "../../typings";
-import { Cog6ToothIcon, EllipsisHorizontalCircleIcon, GifIcon, PlusCircleIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { Cog6ToothIcon, EllipsisHorizontalCircleIcon, GifIcon, PlusCircleIcon, PlusIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { UserPlusIcon, EnvelopeIcon, PhoneIcon, ChatBubbleLeftEllipsisIcon, ShieldExclamationIcon, BoltIcon, AtSymbolIcon, QuestionMarkCircleIcon, Cog8ToothIcon, GiftTopIcon } from '@heroicons/react/24/solid'
 import { useScroll } from "framer-motion";
 import { useState } from "react";
@@ -44,7 +44,7 @@ const Main = (props: propsData) => {
       {/* @ts-ignore */}
       <main className="bg-white min-h-screen">
 
-        <div className="max-w-7xl mx-auto mt-[4rem] border border-solid-800 rounded-lg shadow shadow-md shadow-gray-400">
+        <div className="max-w-7xl mx-auto mt-[4rem] relative border border-solid-800 rounded-lg shadow shadow-md shadow-gray-400">
           <motion.div initial="initial"
             animate="animate"
             variants={animationVariants}
@@ -58,11 +58,11 @@ const Main = (props: propsData) => {
                     <EllipsisHorizontalCircleIcon className="h-10 w-10 text-black" />
                   </div>
                 </div>
-                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-full  absolute top-[7.5rem]">
+                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[7.5rem]">
 
                 </div>
 
-                <div className=" flex flex-col space-y-1 pl-12 mt-[-1.2rem] w-full">
+                <div className=" flex flex-col space-y-1 pl-[1.1rem] mt-[-1.2rem] w-full">
                   <div>
                     <p className="text-gray-500 text-lg font-bold">Inbox</p>
                   </div>
@@ -101,13 +101,13 @@ const Main = (props: propsData) => {
                 </div>
 
 
-                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-full  absolute top-[28.5rem]">
+                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[28.5rem]">
 
 
 
                 </div>
 
-                <div className=" flex flex-col space-y-2 pl-12 mt-[1.8rem] w-full">
+                <div className=" flex flex-col space-y-2 pl-6 mt-[1.8rem] w-full">
                   <div className="flex flex-row justify-between items-center">
                     <p className="text-gray-500 text-lg font-bold">Categories</p>
                     <PlusIcon className="h-6 w-6 text-gray-500" />
@@ -123,11 +123,11 @@ const Main = (props: propsData) => {
                   </div>
                 </div>
 
-                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-full  absolute top-[39rem]">
+                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[39rem]">
 
                 </div>
 
-                <div className=" flex flex-col space-y-5 pl-12 mt-[3rem] w-full">
+                <div className=" flex flex-col space-y-5 pl-6 mt-[3rem] w-full">
 
                   <div onClick={() => setCurrentNav1('Entertainment')} className={currentNav1 == 'Entertainment' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black mt-[-1rem] rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
                     <GiftTopIcon className={currentNav1 == 'Entertainment' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
@@ -145,20 +145,36 @@ const Main = (props: propsData) => {
                     <p className={currentNav1 == 'Entertainment' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Help</p>
                   </div>
                 </div>
-
-                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-full  absolute top-[49rem]">
-
+                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[49rem]">
                 </div>
+                <div className=" flex flex-col space-y-5 pl-6 mt-[2rem] w-full pb-6">
 
-                <div className=" flex flex-col space-y-5 pl-12 mt-[3rem] w-full">
+                  <div className="flex flex-row space-x-3 ml-4 items-center">
+                    <div>
+                      <UserCircleIcon className="h-10 w-10 text-black" />
+                    </div>
 
-                 <div className="flex flex-row space-x-3">
-                    
-                 </div>
+                    <div className="flex flex-col space-y-0">
+                      <div>
+                        <p className="text-black font-bold text-lg">
+                          John Doe
+                        </p>
+                      </div>
+
+                      <div>
+                        <p className="text-black font-semibold text-md">
+                          johnDoe@gmail.com
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </motion.div>
+          <div className="border-l border-gray-300 shadow shadow-gray-200 z-100 h-full  absolute top-0 left-[20rem] ">
+
+          </div>
         </div>
         {/* @ts-ignore */}
         <div className="">
