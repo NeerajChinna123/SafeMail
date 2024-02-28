@@ -51,42 +51,33 @@ const Main = (props: propsData) => {
             transition={animationTransition} className="grid grid-cols-4 gap-x-4">
             <div className="col-span-1 ">
               <div className="flex flex-col relative ">
-                <div className="flex flex-row p-4   justify-between items-center  mt-[-1rem]">
-                  <img className="h-[9rem] w-[9rem]" src='/SE.png' />
+                <div className="flex flex-row p-4   justify-between items-center  mt-[-0.5rem]">
+                  <img className="h-[4rem] w-[8rem]" src='/logo.png' />
 
                   <div>
                     <EllipsisHorizontalCircleIcon className="h-10 w-10 text-black" />
                   </div>
                 </div>
-                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[7.5rem]">
+                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[5rem]">
 
                 </div>
 
-                <div className=" flex flex-col space-y-1 pl-[1.1rem] mt-[-1.2rem] w-full">
+                <div className=" flex flex-col space-y-1 pl-[1.1rem] mt-[0.5rem] w-full">
                   <div>
                     <p className="text-gray-500 text-lg font-bold">Inbox</p>
                   </div>
-
-
-
                   <div onClick={() => setCurrentNav('Requests')} className={currentNav == 'Requests' ? "flex cursor-pointer flex-row space-x-4 p-3 items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out" : "flex cursor-pointer transition-all transform duration-200 ease-in-out p-3 w-full flex-row space-x-4 ml-2 items-center"}>
                     <UserPlusIcon className={currentNav == 'Requests' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
                     <p className={currentNav == 'Requests' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Requests</p>
                   </div>
-
                   <div onClick={() => setCurrentNav('Emails')} className={currentNav == 'Emails' ? "flex cursor-pointer flex-row space-x-4 p-3 items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out" : "flex cursor-pointer transition-all transform duration-200 ease-in-out p-3 w-full flex-row space-x-4 ml-2 items-center"}>
                     <EnvelopeIcon className={currentNav == 'Emails' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
                     <p className={currentNav == 'Emails' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Emails</p>
                   </div>
-
-
                   <div onClick={() => setCurrentNav('Phishing Attempt')} className={currentNav == 'Phishing Attempt' ? "flex cursor-pointer flex-row space-x-4 p-3 items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out" : "flex cursor-pointer transition-all transform duration-200 ease-in-out p-3 w-full flex-row space-x-4 ml-2 items-center"}>
                     <ShieldExclamationIcon className={currentNav == 'Phishing Attempt' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
                     <p className={currentNav == 'Phishing Attempt' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Phishing Attempt</p>
                   </div>
-
-
-
                   <div onClick={() => setCurrentNav('Texts')} className={currentNav == 'Texts' ? "flex cursor-pointer flex-row space-x-4 p-3 items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out" : "flex cursor-pointer transition-all transform duration-200 ease-in-out p-3 w-full flex-row space-x-4 ml-2 items-center"}>
                     <ChatBubbleLeftEllipsisIcon className={currentNav == 'Texts' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
                     <p className={currentNav == 'Texts' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Texts</p>
@@ -96,18 +87,10 @@ const Main = (props: propsData) => {
                     <PhoneIcon className={currentNav == 'Calls' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
                     <p className={currentNav == 'Calls' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Calls</p>
                   </div>
-
-
                 </div>
-
-
-                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[28.5rem]">
-
-
-
-                </div>
-
-                <div className=" flex flex-col space-y-2 pl-6 mt-[1.8rem] w-full">
+                {/* <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[27.5rem]">
+                </div> */}
+                <div className=" flex flex-col space-y-2 pl-6 mt-[1rem] w-full">
                   <div className="flex flex-row justify-between items-center">
                     <p className="text-gray-500 text-lg font-bold">Categories</p>
                     <PlusIcon className="h-6 w-6 text-gray-500" />
@@ -123,7 +106,7 @@ const Main = (props: propsData) => {
                   </div>
                 </div>
 
-                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[39rem]">
+                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[35.5rem]">
 
                 </div>
 
@@ -145,7 +128,7 @@ const Main = (props: propsData) => {
                     <p className={currentNav1 == 'Entertainment' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Help</p>
                   </div>
                 </div>
-                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[49rem]">
+                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[45.8rem]">
                 </div>
                 <div className=" flex flex-col space-y-5 pl-6 mt-[2rem] w-full pb-6">
 
