@@ -1,8 +1,8 @@
 
 import AfterEffectsVideo from "../components/AfterEffects";
 import { BannerType, FitZoneType } from "../../typings";
-import { Cog6ToothIcon, EllipsisHorizontalCircleIcon, GifIcon, PlusCircleIcon, PlusIcon, UserCircleIcon, PencilSquareIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-import { UserPlusIcon, EnvelopeIcon, PhoneIcon, ChatBubbleLeftEllipsisIcon, ShieldExclamationIcon, BoltIcon, AtSymbolIcon, QuestionMarkCircleIcon, Cog8ToothIcon, GiftTopIcon } from '@heroicons/react/24/solid'
+import { Cog6ToothIcon, EllipsisHorizontalCircleIcon, GifIcon, PlusCircleIcon, PlusIcon, PencilSquareIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { UserPlusIcon, EnvelopeIcon, PhoneIcon, ChatBubbleLeftEllipsisIcon, ShieldExclamationIcon, UserCircleIcon, BoltIcon, AtSymbolIcon, QuestionMarkCircleIcon, Cog8ToothIcon, GiftTopIcon } from '@heroicons/react/24/solid'
 import { useScroll } from "framer-motion";
 import { useState } from "react";
 import { motion } from 'framer-motion'
@@ -26,9 +26,160 @@ const animationTransition = {
 
 const Main = (props: propsData) => {
 
-  const [currentNav, setCurrentNav] = useState('Emails')
+  const [currentNav, setCurrentNav] = useState('Emails');
 
-  const [currentNav1, setCurrentNav1] = useState('')
+  const emails = [{
+    id: 1,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 2,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 3,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 4,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 5,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 6,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 7,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 8,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 9,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 10,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 11,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 12,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 13,
+    fullName: 'List Lmin',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'listLm@gmail.com'
+  },
+  {
+    id: 14,
+    fullName: 'Raj ',
+    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+    time: '23:26',
+    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+    toEmail: 'johnDoe@gmail.com',
+    fromEmail: 'Raj@gmail.com'
+  }
+
+
+
+
+  ]
+
+
+  const [searchItem,setSearchItem] = useState("");
+   
+  const [filteredList, setFilteredList] = useState(emails);
+
+
+  const filter = (searchString:any)=>{
+    setSearchItem(searchString);
+    if (!searchString) {
+      setFilteredList(emails);
+    } else {
+      const filtered = emails.filter(email =>
+        email.fullName.toLowerCase().includes(searchString.toLowerCase())
+      );
+      setFilteredList(filtered);
+    }
+  }
+
+
+
   return (
     //@ts-ignore
     <div className="relative">
@@ -95,14 +246,14 @@ const Main = (props: propsData) => {
                     <p className="text-gray-500 text-lg font-bold">Categories</p>
                     <PlusIcon className="h-6 w-6 text-gray-500" />
                   </div>
-                  <div onClick={() => setCurrentNav1('Personal')} className={currentNav1 == 'Personal' ? "flex cursor-pointer flex-row space-x-4 p-3 items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out" : "flex cursor-pointer transition-all transform duration-200 ease-in-out p-3 w-full flex-row space-x-4 ml-2 items-center"}>
-                    <AtSymbolIcon className={currentNav1 == 'Personal' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
-                    <p className={currentNav1 == 'Personal' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Personal</p>
+                  <div onClick={() => setCurrentNav('Personal')} className={currentNav == 'Personal' ? "flex cursor-pointer flex-row space-x-4 p-3 items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out" : "flex cursor-pointer transition-all transform duration-200 ease-in-out p-3 w-full flex-row space-x-4 ml-2 items-center"}>
+                    <AtSymbolIcon className={currentNav == 'Personal' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
+                    <p className={currentNav == 'Personal' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Personal</p>
                   </div>
 
-                  <div onClick={() => setCurrentNav1('Entertainment')} className={currentNav1 == 'Entertainment' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black mt-[-1rem] rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
-                    <BoltIcon className={currentNav1 == 'Entertainment' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
-                    <p className={currentNav1 == 'Entertainment' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Entertainment</p>
+                  <div onClick={() => setCurrentNav('Entertainment')} className={currentNav == 'Entertainment' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black mt-[-1rem] rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
+                    <BoltIcon className={currentNav == 'Entertainment' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
+                    <p className={currentNav == 'Entertainment' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Entertainment</p>
                   </div>
                 </div>
 
@@ -112,20 +263,20 @@ const Main = (props: propsData) => {
 
                 <div className=" flex flex-col space-y-5 pl-6 mt-[3rem] w-full">
 
-                  <div onClick={() => setCurrentNav1('Invites')} className={currentNav1 == 'Invites' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black mt-[-1rem] rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
-                    <GiftTopIcon className={currentNav1 == 'Invites' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
-                    <p className={currentNav1 == 'Invites' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Invites</p>
+                  <div onClick={() => setCurrentNav('Invites')} className={currentNav == 'Invites' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black mt-[-1rem] rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
+                    <GiftTopIcon className={currentNav == 'Invites' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
+                    <p className={currentNav == 'Invites' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Invites</p>
                   </div>
 
-                  <div onClick={() => setCurrentNav1('Account & Settings')} className={currentNav1 == 'Account & Settings' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black  rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
-                    <Cog8ToothIcon className={currentNav1 == 'Account & Settings' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
-                    <p className={currentNav1 == 'Account & Settings' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Account & Settings</p>
+                  <div onClick={() => setCurrentNav('Account & Settings')} className={currentNav == 'Account & Settings' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black  rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
+                    <Cog8ToothIcon className={currentNav == 'Account & Settings' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
+                    <p className={currentNav == 'Account & Settings' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Account & Settings</p>
                   </div>
 
 
-                  <div onClick={() => setCurrentNav1('Help')} className={currentNav1 == 'Help' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
-                    <QuestionMarkCircleIcon className={currentNav1 == 'Help' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
-                    <p className={currentNav1 == 'Help' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Help</p>
+                  <div onClick={() => setCurrentNav('Help')} className={currentNav == 'Help' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
+                    <QuestionMarkCircleIcon className={currentNav == 'Help' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
+                    <p className={currentNav == 'Help' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Help</p>
                   </div>
                 </div>
                 <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[45.8rem]">
@@ -172,13 +323,32 @@ const Main = (props: propsData) => {
                       <div className="relative ">
                         <p className="text-black text-xl font-bold">Inbox</p>
                         <span className="absolute text-sm left-[3.7rem] top-0 text-white px-2 py-1 bg-red-500 rounded-lg">
-                          40
+                          {emails?.length}
                         </span>
                         <p className="text-gray-500 font-semibold text-md mt-1">Maximizing Efficiency</p>
                       </div>
                       <div className="flex flex-row space-x-2 items-center mt-4 rounded-md  px-3 py-2 border border-gray-400">
                         <MagnifyingGlassIcon className="text-black font-bold h-5 w-5" />
-                        <input type='text' className="outline-none text-black w-full font-semibold" placeholder="Search" />
+                        <input onChange={(e:any)=>filter(e.target.value)} value={searchItem} type='text' className="outline-none text-black w-full font-semibold" placeholder="Search" />
+                        {searchItem.length>0 &&
+                        <XMarkIcon onClick={()=>{setSearchItem(''), setFilteredList(emails)}} className="text-black h-5 w-5 font-semibold cursor-pointer" />}
+                      </div>
+
+                      <div className="flex flex-col space-y-2 mt-4 max-h-[36rem] ml-[-0.2rem] pr-4 overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin">
+                        {/* //@ts-ignore */}
+                        {filteredList?.map((email) => (
+                          <div className="flex no-scrollbar flex-row cursor-pointer space-x-1 py-1 pr-2 items-center relative">
+                            <UserCircleIcon className="h-16 w-16 text-black font-semibold" />
+                            <div className="flex flex-col space-y-[0.1rem]">
+                              <p className="text-black font-bold text-md">{email?.fullName}</p>
+                              <p className="text-gray-600 font-bold text-sm">{email?.body?.slice(0, 32)} ...</p>
+
+                            </div>
+                            <div className="absolute top-3 right-0">
+                              <p className="text-gray-600 font-semibold text-sm">{email?.time}</p>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>

@@ -115,3 +115,12 @@ main {
 .half.left {
   border-right: 4px solid black; /* Adjust color and size as needed */
 }
+
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+/* For Chrome, Safari, and Opera */
+.hide-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
