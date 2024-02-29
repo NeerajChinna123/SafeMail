@@ -1,7 +1,7 @@
 
 import AfterEffectsVideo from "../components/AfterEffects";
 import { BannerType, FitZoneType } from "../../typings";
-import { Cog6ToothIcon, EllipsisHorizontalCircleIcon, GifIcon, PlusCircleIcon, PlusIcon, UserCircleIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
+import { Cog6ToothIcon, EllipsisHorizontalCircleIcon, GifIcon, PlusCircleIcon, PlusIcon, UserCircleIcon, PencilSquareIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { UserPlusIcon, EnvelopeIcon, PhoneIcon, ChatBubbleLeftEllipsisIcon, ShieldExclamationIcon, BoltIcon, AtSymbolIcon, QuestionMarkCircleIcon, Cog8ToothIcon, GiftTopIcon } from '@heroicons/react/24/solid'
 import { useScroll } from "framer-motion";
 import { useState } from "react";
@@ -112,20 +112,20 @@ const Main = (props: propsData) => {
 
                 <div className=" flex flex-col space-y-5 pl-6 mt-[3rem] w-full">
 
-                  <div onClick={() => setCurrentNav1('Entertainment')} className={currentNav1 == 'Entertainment' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black mt-[-1rem] rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
-                    <GiftTopIcon className={currentNav1 == 'Entertainment' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
-                    <p className={currentNav1 == 'Entertainment' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Invites</p>
+                  <div onClick={() => setCurrentNav1('Invites')} className={currentNav1 == 'Invites' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black mt-[-1rem] rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
+                    <GiftTopIcon className={currentNav1 == 'Invites' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
+                    <p className={currentNav1 == 'Invites' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Invites</p>
                   </div>
 
-                  <div onClick={() => setCurrentNav1('Entertainment')} className={currentNav1 == 'Entertainment' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black  rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
-                    <Cog8ToothIcon className={currentNav1 == 'Entertainment' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
-                    <p className={currentNav1 == 'Entertainment' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Account & Settings</p>
+                  <div onClick={() => setCurrentNav1('Account & Settings')} className={currentNav1 == 'Account & Settings' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black  rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
+                    <Cog8ToothIcon className={currentNav1 == 'Account & Settings' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
+                    <p className={currentNav1 == 'Account & Settings' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Account & Settings</p>
                   </div>
 
 
-                  <div onClick={() => setCurrentNav1('Entertainment')} className={currentNav1 == 'Entertainment' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
-                    <QuestionMarkCircleIcon className={currentNav1 == 'Entertainment' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
-                    <p className={currentNav1 == 'Entertainment' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Help</p>
+                  <div onClick={() => setCurrentNav1('Help')} className={currentNav1 == 'Help' ? "flex cursor-pointer flex-row space-x-4  items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out px-3" : "flex cursor-pointer transition-all transform duration-200 ease-in-out px-3 w-full flex-row space-x-4 ml-2 items-center"}>
+                    <QuestionMarkCircleIcon className={currentNav1 == 'Help' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
+                    <p className={currentNav1 == 'Help' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Help</p>
                   </div>
                 </div>
                 <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[45.8rem]">
@@ -153,21 +153,49 @@ const Main = (props: propsData) => {
               </div>
             </div>
 
-            <div className="col-span-3">
+            <div className="col-span-3 ">
               <div className="flex flex-col relative">
                 <div className="flex flex-row px-4 py-3 justify-between items-center">
                   <div>
                     <p className="text-black text-[1.5rem] font-bold">All Emails</p>
                   </div>
-
-                  <motion.div whileTap={{scale:0.99}} className="flex mt-1 flex-row hover:opacity-80 transition-all transform ease-in-out duration-300 space-x-2 items-center px-3 py-3 bg-black cursor-pointer rounded-xl">
-                    <PencilSquareIcon className="h-5 w-5 text-white font-semibold"/>
-                      <p className="font-semibold text-lg" >Compose</p>
+                  <motion.div whileTap={{ scale: 0.99 }} className="flex mt-1 flex-row hover:opacity-80 transition-all transform ease-in-out duration-300 space-x-2 items-center px-3 py-3 bg-black cursor-pointer rounded-xl">
+                    <PencilSquareIcon className="h-5 w-5 text-white font-semibold" />
+                    <p className="font-semibold text-lg" >Compose</p>
                   </motion.div>
                 </div>
-
                 <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[101.8%] left-[-1rem]  absolute top-[5rem]">
                 </div>
+                <div className="flex flex-row">
+                  <div className="col-span-1 p-4 w-[37%]">
+                    <div className="flex flex-col">
+                      <div className="relative ">
+                        <p className="text-black text-xl font-bold">Inbox</p>
+                        <span className="absolute text-sm left-[3.7rem] top-0 text-white px-2 py-1 bg-red-500 rounded-lg">
+                          40
+                        </span>
+                        <p className="text-gray-500 font-semibold text-md mt-1">Maximizing Efficiency</p>
+                      </div>
+                      <div className="flex flex-row space-x-2 items-center mt-4 rounded-md  px-3 py-2 border border-gray-400">
+                        <MagnifyingGlassIcon className="text-black font-bold h-5 w-5" />
+                        <input type='text' className="outline-none text-black w-full font-semibold" placeholder="Search" />
+                      </div>
+                    </div>
+                  </div>
+                  {/* 
+                  <div className="col-span-1 p-4">
+                    <div className="flex flex-col">
+                      <div className="relative ">
+                        <p className="text-black text-xl font-bold">Inbox</p>
+                        <span className="absolute text-sm left-[3.7rem] top-0 text-white px-2 py-1 bg-red-500 rounded-lg">
+                          40
+                        </span>
+                        <p className="text-gray-500 font-semibold text-md mt-1">Maximizing Efficiency, and Achvieving Email Zen.</p>
+                      </div>
+                    </div>
+                  </div> */}
+                </div>
+
               </div>
             </div>
           </motion.div>
