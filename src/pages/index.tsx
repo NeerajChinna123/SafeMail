@@ -541,7 +541,7 @@ const Main = (props: propsData) => {
                     <div className="flex flex-col space-y-6 pt-3  max-h-[45rem]   overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin">
 
                       {currentIdData?.emailReplies?.map((email: any) => (
-                        <div className="flex flex-row  p-4 space-x-2 items-start relative">
+                        <div key={email?.id} className="flex flex-row  p-4 space-x-2 items-start relative">
                           <div className="mt-[-0.5rem]">
                             <UserCircleIcon className="h-16 w-16 text-black" />
                           </div>
