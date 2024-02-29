@@ -318,7 +318,7 @@ const Main = (props: propsData) => {
                 <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[101.8%] left-[-1rem]  absolute top-[5rem]">
                 </div>
                 <div className="flex flex-row">
-                  <div className="col-span-1 p-4 w-[37%]">
+                  <div className="col-span-1 p-4 w-[40%]">
                     <div className="flex flex-col">
                       <div className="relative ">
                         <p className="text-black text-xl font-bold">Inbox</p>
@@ -341,7 +341,7 @@ const Main = (props: propsData) => {
                             <UserCircleIcon className="h-16 w-16 text-black font-semibold" />
                             <div className="flex flex-col space-y-[0.1rem]">
                               <p className="text-black font-bold text-md">{email?.fullName}</p>
-                              <p className="text-gray-600 font-bold text-sm">{email?.body?.slice(0, 32)} ...</p>
+                              <p className="text-gray-600 font-bold text-sm">{email?.body?.slice(0, 36)} ...</p>
 
                             </div>
                             <div className="absolute top-3 right-0">
@@ -372,6 +372,9 @@ const Main = (props: propsData) => {
           <div className="border-l border-gray-300 shadow shadow-gray-200 z-100 h-full  absolute top-0 left-[20rem] ">
 
           </div>
+          <div className="border-l border-gray-300 shadow shadow-gray-200 z-100 h-[90%]  absolute top-[5.1rem] left-[44rem] ">
+
+</div>
         </div>
         {/* @ts-ignore */}
         <div className="">
