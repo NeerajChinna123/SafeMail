@@ -1,7 +1,7 @@
 
 import AfterEffectsVideo from "../components/AfterEffects";
 import { BannerType, FitZoneType } from "../../typings";
-import { Cog6ToothIcon, EllipsisHorizontalCircleIcon, GifIcon, PlusCircleIcon, PlusIcon, PencilSquareIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Cog6ToothIcon, EllipsisHorizontalCircleIcon, GifIcon, PlusCircleIcon, PlusIcon, PencilSquareIcon, MagnifyingGlassIcon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import { UserPlusIcon, EnvelopeIcon, PhoneIcon, ChatBubbleLeftEllipsisIcon, ShieldExclamationIcon, UserCircleIcon, BoltIcon, AtSymbolIcon, QuestionMarkCircleIcon, Cog8ToothIcon, GiftTopIcon } from '@heroicons/react/24/solid'
 import { useScroll } from "framer-motion";
 import { useState } from "react";
@@ -35,7 +35,52 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 11,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    },
+    {
+      id: 13,
+      fullName: 'John Doe',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:20',
+      timeStamp: 'Mon, 29 Jan, 23.20 (3 days ago)',
+      toEmail: 'listLm@gmail.com',
+      fromEmail: 'johnDoe@gmail.com',
+    },
+    {
+      id: 14,
+      fullName: 'John Doe',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:20',
+      timeStamp: 'Mon, 29 Jan, 23.20 (3 days ago)',
+      toEmail: 'listLm@gmail.com',
+      fromEmail: 'johnDoe@gmail.com',
+    },
+    {
+      id: 15,
+      fullName: 'John Doe',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:20',
+      timeStamp: 'Mon, 29 Jan, 23.20 (3 days ago)',
+      toEmail: 'listLm@gmail.com',
+      fromEmail: 'johnDoe@gmail.com',
+    },
+    {
+      id: 16,
+      fullName: 'John Doe',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:20',
+      timeStamp: 'Mon, 29 Jan, 23.20 (3 days ago)',
+      toEmail: 'listLm@gmail.com',
+      fromEmail: 'johnDoe@gmail.com',
+    }]
   },
   {
     id: 2,
@@ -44,7 +89,16 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 21,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   },
   {
     id: 3,
@@ -53,7 +107,16 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 31,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   },
   {
     id: 4,
@@ -62,7 +125,16 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 41,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   },
   {
     id: 5,
@@ -71,7 +143,16 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 51,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   },
   {
     id: 6,
@@ -80,7 +161,16 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 61,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   },
   {
     id: 7,
@@ -89,7 +179,16 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 71,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   },
   {
     id: 8,
@@ -98,7 +197,16 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 81,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   },
   {
     id: 9,
@@ -107,7 +215,16 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 91,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   },
   {
     id: 10,
@@ -116,7 +233,16 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 101,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   },
   {
     id: 11,
@@ -125,7 +251,16 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 111,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   },
   {
     id: 12,
@@ -134,7 +269,16 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 121,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   },
   {
     id: 13,
@@ -143,7 +287,16 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com'
+    fromEmail: 'listLm@gmail.com',
+    emailReplies: [{
+      id: 131,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   },
   {
     id: 14,
@@ -152,21 +305,29 @@ const Main = (props: propsData) => {
     time: '23:26',
     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
     toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'Raj@gmail.com'
+    fromEmail: 'Raj@gmail.com',
+    emailReplies: [{
+      id: 141,
+      fullName: 'List Lmin',
+      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+      time: '23:26',
+      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+      toEmail: 'johnDoe@gmail.com',
+      fromEmail: 'listLm@gmail.com',
+    }]
   }
-
-
-
-
   ]
 
 
-  const [searchItem,setSearchItem] = useState("");
-   
+  const [searchItem, setSearchItem] = useState("");
+
   const [filteredList, setFilteredList] = useState(emails);
 
+  const [currentId, setCurrentId] = useState(1);
 
-  const filter = (searchString:any)=>{
+  const [currentIdData, setCurrentIdData] = useState(filteredList[0]);
+
+  const filter = (searchString: any) => {
     setSearchItem(searchString);
     if (!searchString) {
       setFilteredList(emails);
@@ -178,8 +339,20 @@ const Main = (props: propsData) => {
     }
   }
 
+  //@ts-ignore
+  const [newIds, setNewIds] = useState([])
+  const emailData = (email: any) => {
+    const ema = emails?.find((em: any) => em?.id === email?.id)
+    //@ts-ignore
+    setCurrentIdData(ema);
 
+    console.log('as', ema?.id);
+    //@ts-ignore
+    setNewIds([...newIds, ema?.id]);
 
+  }
+  //@ts-ignore
+  console.log('m-w', newIds);
   return (
     //@ts-ignore
     <div className="relative">
@@ -209,9 +382,7 @@ const Main = (props: propsData) => {
                     <EllipsisHorizontalCircleIcon className="h-10 w-10 text-black" />
                   </div>
                 </div>
-                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[104%]  absolute top-[5rem]">
 
-                </div>
 
                 <div className=" flex flex-col space-y-1 pl-[1.1rem] mt-[0.5rem] w-full">
                   <div>
@@ -315,8 +486,7 @@ const Main = (props: propsData) => {
                     <p className="font-semibold text-lg" >Compose</p>
                   </motion.div>
                 </div>
-                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[101.8%] left-[-1rem]  absolute top-[5rem]">
-                </div>
+
                 <div className="flex flex-row">
                   <div className="col-span-1 p-4 w-[40%]">
                     <div className="flex flex-col">
@@ -329,52 +499,87 @@ const Main = (props: propsData) => {
                       </div>
                       <div className="flex flex-row space-x-2 items-center mt-4 rounded-md  px-3 py-2 border border-gray-400">
                         <MagnifyingGlassIcon className="text-black font-bold h-5 w-5" />
-                        <input onChange={(e:any)=>filter(e.target.value)} value={searchItem} type='text' className="outline-none text-black w-full font-semibold" placeholder="Search" />
-                        {searchItem.length>0 &&
-                        <XMarkIcon onClick={()=>{setSearchItem(''), setFilteredList(emails)}} className="text-black h-5 w-5 font-semibold cursor-pointer" />}
+                        <input onChange={(e: any) => filter(e.target.value)} value={searchItem} type='text' className="outline-none text-black w-full font-semibold" placeholder="Search" />
+                        {searchItem.length > 0 &&
+                          <XMarkIcon onClick={() => { setSearchItem(''), setFilteredList(emails) }} className="text-black h-5 w-5 font-semibold cursor-pointer" />}
                       </div>
 
-                      <div className="flex flex-col space-y-2 mt-4 max-h-[36rem] ml-[-0.2rem] pr-4 overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin">
+                      <div className={"flex flex-col space-y-1 mt-4 max-h-[36rem] ml-[-0.2rem] pr-2 overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin"}>
                         {/* //@ts-ignore */}
                         {filteredList?.map((email) => (
-                          <div className="flex no-scrollbar flex-row cursor-pointer space-x-1 py-1 pr-2 items-center relative">
-                            <UserCircleIcon className="h-16 w-16 text-black font-semibold" />
-                            <div className="flex flex-col space-y-[0.1rem]">
-                              <p className="text-black font-bold text-md">{email?.fullName}</p>
-                              <p className="text-gray-600 font-bold text-sm">{email?.body?.slice(0, 36)} ...</p>
+                          <div onClick={() => emailData(email)} className={currentIdData?.id == email?.id ? " bg-gray-200 rounded-md transition-all relative ease-in-out w-full duration-300" : "transition-all w-full relative ease-in-out duration-300"}>
 
+                            <div className="flex no-scrollbar flex-row cursor-pointer  space-x-1 py-1 px-1 py-2 items-center relative">
+                              <UserCircleIcon className="h-16 w-16 text-black font-semibold" />
+                              <div className="flex flex-col space-y-[0.1rem]">
+                                <p className="text-black font-bold text-md">{email?.fullName}</p>
+                                {/* @ts-ignore  */}
+                                <p className={newIds.includes(email?.id) ? "text-gray-500 font-bold text-sm" : "text-black font-bold text-sm"}>{email?.body?.slice(0, 36)} ...</p>
+
+                              </div>
                             </div>
-                            <div className="absolute top-3 right-0">
+                            {
+                              //@ts-ignore
+                              newIds.includes(email?.id) ? '' :
+                                <div className="absolute top-[0.9rem] left-[9.5rem] p-[0.2rem] bg-blue-600 rounded-md">
+                                  <p className="text-white font-semibold text-xs">New</p>
+                                </div>
+                            }
+                            <div className="absolute top-4 left-[18rem]">
                               <p className="text-gray-600 font-semibold text-sm">{email?.time}</p>
                             </div>
                           </div>
                         ))}
                       </div>
+
+
+
                     </div>
                   </div>
-                  {/* 
-                  <div className="col-span-1 p-4">
-                    <div className="flex flex-col">
-                      <div className="relative ">
-                        <p className="text-black text-xl font-bold">Inbox</p>
-                        <span className="absolute text-sm left-[3.7rem] top-0 text-white px-2 py-1 bg-red-500 rounded-lg">
-                          40
-                        </span>
-                        <p className="text-gray-500 font-semibold text-md mt-1">Maximizing Efficiency, and Achvieving Email Zen.</p>
-                      </div>
+
+                  <div className="col-span-1 w-[60%] ">
+                    <div className="flex flex-col space-y-6 pt-3  max-h-[45rem]   overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin">
+
+                      {currentIdData?.emailReplies?.map((email: any) => (
+                        <div className="flex flex-row  p-4 space-x-2 items-start relative">
+                          <div className="mt-[-0.5rem]">
+                            <UserCircleIcon className="h-16 w-16 text-black" />
+                          </div>
+
+                          <div className="flex flex-col space-y-[0.1rem] relative ">
+                            <p className="text-black font-bold text-md">{email?.fromEmail}</p>
+                            <p className="text-gray-700 font-semibold text-sm relative">to {email?.toEmail} <span className="absolute"><ChevronDownIcon className="h-5 w-5 font-bold text-gray-400 ml-1 pt-[0.03rem]" /></span> </p>
+                            <p className="text-black text-md font-semibold">{email?.body}</p>
+
+
+                          </div>
+
+                          <div className=" border-b shadow border-gray-300 shadow-gray-200 w-full absolute left-[-0.5rem] bottom-[-0.8rem]"></div>
+                        </div>
+
+                      ))}
+
+
                     </div>
-                  </div> */}
+                  </div>
+
                 </div>
 
               </div>
+
             </div>
           </motion.div>
+          <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[75%] left-[20rem]  absolute top-[5rem]">
+          </div>
+          <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[25%]  absolute top-[5rem]">
+
+          </div>
           <div className="border-l border-gray-300 shadow shadow-gray-200 z-100 h-full  absolute top-0 left-[20rem] ">
 
           </div>
           <div className="border-l border-gray-300 shadow shadow-gray-200 z-100 h-[90%]  absolute top-[5.1rem] left-[44rem] ">
 
-</div>
+          </div>
         </div>
         {/* @ts-ignore */}
         <div className="">
