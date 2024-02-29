@@ -1,7 +1,7 @@
 
 import AfterEffectsVideo from "../components/AfterEffects";
 import { BannerType, FitZoneType } from "../../typings";
-import { Cog6ToothIcon, EllipsisHorizontalCircleIcon, GifIcon, PlusCircleIcon, PlusIcon, UserCircleIcon } from '@heroicons/react/24/outline'
+import { Cog6ToothIcon, EllipsisHorizontalCircleIcon, GifIcon, PlusCircleIcon, PlusIcon, UserCircleIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
 import { UserPlusIcon, EnvelopeIcon, PhoneIcon, ChatBubbleLeftEllipsisIcon, ShieldExclamationIcon, BoltIcon, AtSymbolIcon, QuestionMarkCircleIcon, Cog8ToothIcon, GiftTopIcon } from '@heroicons/react/24/solid'
 import { useScroll } from "framer-motion";
 import { useState } from "react";
@@ -136,14 +136,12 @@ const Main = (props: propsData) => {
                     <div>
                       <UserCircleIcon className="h-10 w-10 text-black" />
                     </div>
-
                     <div className="flex flex-col space-y-0">
                       <div>
                         <p className="text-black font-bold text-lg">
                           John Doe
                         </p>
                       </div>
-
                       <div>
                         <p className="text-black font-semibold text-md">
                           johnDoe@gmail.com
@@ -151,6 +149,24 @@ const Main = (props: propsData) => {
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-span-3">
+              <div className="flex flex-col relative">
+                <div className="flex flex-row px-4 py-3 justify-between items-center">
+                  <div>
+                    <p className="text-black text-[1.5rem] font-bold">All Emails</p>
+                  </div>
+
+                  <motion.div whileTap={{scale:0.99}} className="flex mt-1 flex-row hover:opacity-80 transition-all transform ease-in-out duration-300 space-x-2 items-center px-3 py-3 bg-black cursor-pointer rounded-xl">
+                    <PencilSquareIcon className="h-5 w-5 text-white font-semibold"/>
+                      <p className="font-semibold text-lg" >Compose</p>
+                  </motion.div>
+                </div>
+
+                <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[101.8%] left-[-1rem]  absolute top-[5rem]">
                 </div>
               </div>
             </div>
