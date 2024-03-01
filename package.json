@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^41.1.0",
+    "@ckeditor/ckeditor5-react": "^6.2.0",
     "@heroicons/react": "^2.0.18",
     "aws-mqtt-client": "^0.0.6",
     "axios": "^1.6.2",

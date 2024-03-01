@@ -2,11 +2,18 @@
 import AfterEffectsVideo from "../components/AfterEffects";
 import { BannerType, FitZoneType } from "../../typings";
 import { Cog6ToothIcon, EllipsisHorizontalCircleIcon, GifIcon, PlusCircleIcon, PlusIcon, PencilSquareIcon, MagnifyingGlassIcon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
-import { UserPlusIcon, EnvelopeIcon, PhoneIcon, ChatBubbleLeftEllipsisIcon, ShieldExclamationIcon, UserCircleIcon, BoltIcon, AtSymbolIcon, QuestionMarkCircleIcon, Cog8ToothIcon, GiftTopIcon } from '@heroicons/react/24/solid'
+import {
+  UserPlusIcon, EnvelopeIcon, PhoneIcon, ChatBubbleLeftEllipsisIcon, ShieldExclamationIcon, UserCircleIcon, BoltIcon, AtSymbolIcon, QuestionMarkCircleIcon, Cog8ToothIcon, GiftTopIcon,
+  XCircleIcon,
+  PaperAirplaneIcon
+} from '@heroicons/react/24/solid'
 import { useScroll } from "framer-motion";
 import { useState } from "react";
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ClockIcon } from "@heroicons/react/24/solid";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import dynamic from "next/dynamic";
 
 
 export interface propsData {
@@ -30,6 +37,12 @@ const Main = (props: propsData) => {
 
   const [compose, setCompose] = useState(false);
 
+  const Editor = dynamic(() => import("../components/MyEditor"), { ssr: false });
+  const variants = {
+    hidden: { opacity: 0, y: 50 }, // Start with a scale of 0.75 and faded out and moved down by 50px
+    visible: { opacity: 1, y: 0 }, // Scale to normal size, fade in, and move to original position
+    exit: { opacity: 0, y: -50 } // Scale down to 0.75, fade out and move up by 50px
+  };
   const emails = [{
     id: 1,
     fullName: 'List Lmin',
@@ -355,6 +368,7 @@ const Main = (props: propsData) => {
   }
   //@ts-ignore
   console.log('m-w', newIds);
+
   return (
     //@ts-ignore
     <div className="relative">
@@ -577,24 +591,105 @@ const Main = (props: propsData) => {
           <div className="border-l border-gray-300 shadow shadow-gray-200 z-100 h-[90%]  absolute top-[5.1rem] left-[44rem] ">
 
           </div>
-          <motion.div className="absolute border z-50 border-gray-400 rounded-lg w-[46.8%] shadow shadow-gray-200 flex right-0 bottom-0 flex-col">
-            <div className="flex flex-row justify-between p-4 items-center bg-gray-100">
-              <p className="text-lg text-black font-semibold">New Email</p>
-              <XMarkIcon className="h-5 w-5 text-black" />
-            </div>
-            <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[100%] ">
 
-            </div>
-
-            <div className="flex flex-row space-x-2 p-4 items-center bg-white">
-              <div><p className="text-gray-500 text-lg font-semibold">From : </p></div>
-              <input type='email' className="outline-none text-black w-[60%] font-semibold" placeholder="Enter Your Email" />
-              <div>
+          {compose &&
+            <motion.div initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={variants}
+              transition={{ duration: 0.2 }}
+              className="absolute right-3 border z-50 border-gray-400 rounded-lg w-[43%] shadow shadow-gray-200 flex  bottom-2 rounded-xl p-1 bg-white flex-col">
+              <div className="flex flex-row justify-between p-4 items-center bg-gray-100">
+                <p className="text-lg text-black font-semibold">New Email</p>
+                <XMarkIcon onClick={() => setCompose(false)} className="h-5 w-5 text-black cursor-pointer" />
+              </div>
+              <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[100%] ">
 
               </div>
-            </div>
 
-          </motion.div>
+              <div className="flex flex-row space-x-2 p-4 items-center bg-white">
+                <div><p className="text-gray-500 text-lg font-semibold">From : </p></div>
+                <input type='email' className="outline-none text-black w-[60%] font-semibold" placeholder="Enter Your Email" />
+                <div>
+
+                </div>
+              </div>
+
+              <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[100%] ">
+
+              </div>
+
+              <div className="flex flex-row space-x-2 p-4 items-center bg-white">
+                <div><p className="text-gray-500 text-lg font-semibold">To : </p></div>
+                <div className="flex flex-row items-center space-x-2 p-1 pb-2 px-2 bg-gray-200 rounded-xl">
+                  <div className="mt-1">
+                    <UserCircleIcon className="h-6 w-6 text-black" />
+                  </div>
+                  <div>
+                    <p className="text-black text-md">johnDoe@gmail.com</p>
+                  </div>
+
+                  <div className="mt-[0.05rem]">
+                    <XCircleIcon className="h-4 w-4 text-gray-600 " />
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[100%] ">
+
+              </div>
+
+
+              <div className="flex flex-row space-x-2 p-4 items-center bg-white">
+                <div><p className="text-gray-500 text-lg font-semibold">Subject : </p></div>
+                <input type='text' className="outline-none text-black w-[82%] font-semibold" placeholder="Enter Subject" />
+              </div>
+
+              <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[100%] ">
+
+              </div>
+
+
+
+
+              <div className="p-2 py-4">
+                {/* <CKEditor
+               
+                editor={ClassicEditor}
+                data="<p>Hello from CKEditor&nbsp;5!</p>"
+                onReady={editor => {
+                  // You can store the "editor" and use when it is needed.
+                  console.log('Editor is ready to use!', editor);
+                }}
+                onChange={(event) => {
+                  console.log(event);
+                }}
+                onBlur={(event, editor) => {
+                  console.log('Blur.', editor);
+                }}
+                onFocus={(event, editor) => {
+                  console.log('Focus.', editor);
+                }}
+              /> */}
+                <Editor
+                  value={"Test"}
+                  onChange={(v: any) => console.log(v)}
+                />
+              </div>
+
+              <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[100%] ">
+
+              </div>
+
+              <div className="p-4 bg-white">
+                <motion.div whileTap={{ scale: 0.99 }} className="flex mt-1 flex-row hover:opacity-80 justify-center  transition-all w-[20%] transform ease-in-out duration-300 space-x-2 items-center px-2 py-2 bg-black cursor-pointer rounded-lg">
+
+                  <p className="font-semibold text-lg" >Send</p>
+                  <PaperAirplaneIcon className="text-white h-5 w-5" />
+                </motion.div>
+              </div>
+            </motion.div>
+          }
         </div>
         {/* @ts-ignore */}
         <div className="">

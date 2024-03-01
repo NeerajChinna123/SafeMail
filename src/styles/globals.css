@@ -124,3 +124,8 @@ main {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+
+.ck.ck-editor__main>.ck-editor__editable{
+  height:130px
+}
