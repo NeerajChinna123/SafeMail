@@ -28,6 +28,8 @@ const Main = (props: propsData) => {
 
   const [currentNav, setCurrentNav] = useState('Emails');
 
+  const [compose, setCompose] = useState(false);
+
   const emails = [{
     id: 1,
     fullName: 'List Lmin',
@@ -481,7 +483,7 @@ const Main = (props: propsData) => {
                   <div>
                     <p className="text-black text-[1.5rem] font-bold">All Emails</p>
                   </div>
-                  <motion.div whileTap={{ scale: 0.99 }} className="flex mt-1 flex-row hover:opacity-80 transition-all transform ease-in-out duration-300 space-x-2 items-center px-3 py-3 bg-black cursor-pointer rounded-xl">
+                  <motion.div onClick={() => setCompose(true)} whileTap={{ scale: 0.99 }} className="flex mt-1 flex-row hover:opacity-80 transition-all transform ease-in-out duration-300 space-x-2 items-center px-3 py-3 bg-black cursor-pointer rounded-xl">
                     <PencilSquareIcon className="h-5 w-5 text-white font-semibold" />
                     <p className="font-semibold text-lg" >Compose</p>
                   </motion.div>
@@ -531,9 +533,6 @@ const Main = (props: propsData) => {
                           </div>
                         ))}
                       </div>
-
-
-
                     </div>
                   </div>
 
@@ -550,8 +549,6 @@ const Main = (props: propsData) => {
                             <p className="text-black font-bold text-md">{email?.fromEmail}</p>
                             <p className="text-gray-700 font-semibold text-sm relative">to {email?.toEmail} <span className="absolute"><ChevronDownIcon className="h-5 w-5 font-bold text-gray-400 ml-1 pt-[0.03rem]" /></span> </p>
                             <p className="text-black text-md font-semibold">{email?.body}</p>
-
-
                           </div>
 
                           <div className=" border-b shadow border-gray-300 shadow-gray-200 w-full absolute left-[-0.5rem] bottom-[-0.8rem]"></div>
@@ -580,6 +577,24 @@ const Main = (props: propsData) => {
           <div className="border-l border-gray-300 shadow shadow-gray-200 z-100 h-[90%]  absolute top-[5.1rem] left-[44rem] ">
 
           </div>
+          <motion.div className="absolute border z-50 border-gray-400 rounded-lg w-[46.8%] shadow shadow-gray-200 flex right-0 bottom-0 flex-col">
+            <div className="flex flex-row justify-between p-4 items-center bg-gray-100">
+              <p className="text-lg text-black font-semibold">New Email</p>
+              <XMarkIcon className="h-5 w-5 text-black" />
+            </div>
+            <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[100%] ">
+
+            </div>
+
+            <div className="flex flex-row space-x-2 p-4 items-center bg-white">
+              <div><p className="text-gray-500 text-lg font-semibold">From : </p></div>
+              <input type='email' className="outline-none text-black w-[60%] font-semibold" placeholder="Enter Your Email" />
+              <div>
+
+              </div>
+            </div>
+
+          </motion.div>
         </div>
         {/* @ts-ignore */}
         <div className="">
