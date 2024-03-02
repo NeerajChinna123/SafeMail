@@ -359,7 +359,7 @@ const Main = (props: propsData) => {
 
   const [currentId, setCurrentId] = useState(1);
 
-  const [currentIdData, setCurrentIdData] = useState(filteredList.length > 0 ? filteredList[0] : []);
+  const [currentIdData, setCurrentIdData] = useState(filteredList?.length > 0 ? filteredList[0] : []);
 
   const filter = (searchString: any) => {
     setSearchItem(searchString);
@@ -445,7 +445,13 @@ const Main = (props: propsData) => {
       "subject": subject,
       "fromEmail": from,
       "emailReplies": [
+        {
+          "fullName": extractFullNameFromEmail(from),
+          "body": 'Teting',
+          "toEmail": from,
 
+          "fromEmail": to,
+        }
       ]
     }
 
@@ -461,7 +467,7 @@ const Main = (props: propsData) => {
 
     try {
       const res = await axios.post(
-        `http://localhost:3001/emails`,
+        `${process.env.NEXT_PUBLIC_API_END_POINT}`,
         payload,
         customConfig
       );
@@ -820,7 +826,7 @@ const Main = (props: propsData) => {
               </div>
 
               <div className="p-4 bg-white">
-         
+
                 <motion.button
                   whileTap={{ scale: 0.99 }}
                   onClick={onSubmit}
@@ -883,7 +889,7 @@ export async function getServerSideProps(context: any) {
 
   try {
     const emailRes = await axios.get(
-      `http://localhost:3001/emails`,
+      `${process.env.NEXT_PUBLIC_API_END_POINT}`,
       customConfig
     );
     //@ts-ignore
