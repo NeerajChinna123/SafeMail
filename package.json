@@ -13,7 +13,7 @@
     "@ckeditor/ckeditor5-react": "^6.2.0",
     "@heroicons/react": "^2.0.18",
     "aws-mqtt-client": "^0.0.6",
-    "axios": "^1.6.2",
+    "axios": "^1.6.7",
     "framer-motion": "^10.16.5",
     "fs": "^0.0.1-security",
     "next": "14.0.2",

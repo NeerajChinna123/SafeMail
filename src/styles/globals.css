@@ -127,5 +127,5 @@ main {
 
 
 .ck.ck-editor__main>.ck-editor__editable{
-  height:130px
+  height:130px!important
 }

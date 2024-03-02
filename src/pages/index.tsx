@@ -7,18 +7,14 @@ import {
   XCircleIcon,
   PaperAirplaneIcon
 } from '@heroicons/react/24/solid'
-import { useScroll } from "framer-motion";
 import { useState } from "react";
 import { motion, AnimatePresence } from 'framer-motion'
-import { ClockIcon } from "@heroicons/react/24/solid";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import dynamic from "next/dynamic";
+import axios from "axios";
 
 
 export interface propsData {
-  banner: [BannerType];
-  fitZone: [FitZoneType];
+  emails:any
 }
 
 const animationVariants = {
@@ -33,6 +29,10 @@ const animationTransition = {
 
 const Main = (props: propsData) => {
 
+
+  //@ts-ignore
+  console.log('pe', props?.emails);
+
   const [currentNav, setCurrentNav] = useState('Emails');
 
   const [compose, setCompose] = useState(false);
@@ -43,296 +43,311 @@ const Main = (props: propsData) => {
     visible: { opacity: 1, y: 0 }, // Scale to normal size, fade in, and move to original position
     exit: { opacity: 0, y: -50 } // Scale down to 0.75, fade out and move up by 50px
   };
-  const emails = [{
-    id: 1,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 11,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    },
-    {
-      id: 13,
-      fullName: 'John Doe',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:20',
-      timeStamp: 'Mon, 29 Jan, 23.20 (3 days ago)',
-      toEmail: 'listLm@gmail.com',
-      fromEmail: 'johnDoe@gmail.com',
-    },
-    {
-      id: 14,
-      fullName: 'John Doe',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:20',
-      timeStamp: 'Mon, 29 Jan, 23.20 (3 days ago)',
-      toEmail: 'listLm@gmail.com',
-      fromEmail: 'johnDoe@gmail.com',
-    },
-    {
-      id: 15,
-      fullName: 'John Doe',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:20',
-      timeStamp: 'Mon, 29 Jan, 23.20 (3 days ago)',
-      toEmail: 'listLm@gmail.com',
-      fromEmail: 'johnDoe@gmail.com',
-    },
-    {
-      id: 16,
-      fullName: 'John Doe',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:20',
-      timeStamp: 'Mon, 29 Jan, 23.20 (3 days ago)',
-      toEmail: 'listLm@gmail.com',
-      fromEmail: 'johnDoe@gmail.com',
-    }]
-  },
-  {
-    id: 2,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 21,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  },
-  {
-    id: 3,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 31,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  },
-  {
-    id: 4,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 41,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  },
-  {
-    id: 5,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 51,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  },
-  {
-    id: 6,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 61,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  },
-  {
-    id: 7,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 71,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  },
-  {
-    id: 8,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 81,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  },
-  {
-    id: 9,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 91,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  },
-  {
-    id: 10,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 101,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  },
-  {
-    id: 11,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 111,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  },
-  {
-    id: 12,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 121,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  },
-  {
-    id: 13,
-    fullName: 'List Lmin',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'listLm@gmail.com',
-    emailReplies: [{
-      id: 131,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  },
-  {
-    id: 14,
-    fullName: 'Raj ',
-    body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-    time: '23:26',
-    timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-    toEmail: 'johnDoe@gmail.com',
-    fromEmail: 'Raj@gmail.com',
-    emailReplies: [{
-      id: 141,
-      fullName: 'List Lmin',
-      body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
-      time: '23:26',
-      timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
-      toEmail: 'johnDoe@gmail.com',
-      fromEmail: 'listLm@gmail.com',
-    }]
-  }
-  ]
+  // const emails = [{
+  //   id: 1,
+  //   fullName: 'List Lmin',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 11,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   },
+  //   {
+  //     id: 13,
+  //     fullName: 'John Doe',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:20',
+  //     timeStamp: 'Mon, 29 Jan, 23.20 (3 days ago)',
+  //     toEmail: 'listLm@gmail.com',
+  //     fromEmail: 'johnDoe@gmail.com',
+  //   },
+  //   {
+  //     id: 14,
+  //     fullName: 'John Doe',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:20',
+  //     timeStamp: 'Mon, 29 Jan, 23.20 (3 days ago)',
+  //     toEmail: 'listLm@gmail.com',
+  //     fromEmail: 'johnDoe@gmail.com',
+  //   },
+  //   {
+  //     id: 15,
+  //     fullName: 'John Doe',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:20',
+  //     timeStamp: 'Mon, 29 Jan, 23.20 (3 days ago)',
+  //     toEmail: 'listLm@gmail.com',
+  //     fromEmail: 'johnDoe@gmail.com',
+  //   },
+  //   {
+  //     id: 16,
+  //     fullName: 'John Doe',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:20',
+  //     timeStamp: 'Mon, 29 Jan, 23.20 (3 days ago)',
+  //     toEmail: 'listLm@gmail.com',
+  //     fromEmail: 'johnDoe@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 2,
+  //   fullName: 'List Lmin',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 21,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 3,
+  //   fullName: 'List Lmin',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 31,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 4,
+  //   fullName: 'List Lmin',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 41,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 5,
+  //   fullName: 'List Lmin',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 51,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 6,
+  //   fullName: 'List Lmin',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 61,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 7,
+  //   fullName: 'List Lmin',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 71,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 8,
+  //   subject: 'Testing',
+  //   fullName: 'List Lmin',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 81,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 9,
+  //   fullName: 'List Lmin',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 91,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 10,
+  //   fullName: 'List Lmin',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 101,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 11,
+  //   fullName: 'List Lmin',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 111,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 12,
+  //   fullName: 'List Lmin',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 121,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 13,
+  //   fullName: 'List Lmin',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'listLm@gmail.com',
+  //   emailReplies: [{
+  //     id: 131,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // },
+  // {
+  //   id: 14,
+  //   fullName: 'Raj ',
+  //   subject: 'Testing',
+  //   body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //   time: '23:26',
+  //   timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //   toEmail: 'johnDoe@gmail.com',
+  //   fromEmail: 'Raj@gmail.com',
+  //   emailReplies: [{
+  //     id: 141,
+  //     fullName: 'List Lmin',
+  //     body: "Hi there! I've been thinking about improving my online security. Do you have any recommendations, Do you have any recommendations, Do you have any recommendations",
+  //     time: '23:26',
+  //     timeStamp: 'Mon, 29 Jan, 23.26 (3 days ago)',
+  //     toEmail: 'johnDoe@gmail.com',
+  //     fromEmail: 'listLm@gmail.com',
+  //   }]
+  // }
+  // ]
 
+  const emails = props?.emails;
 
   const [searchItem, setSearchItem] = useState("");
 
@@ -347,6 +362,7 @@ const Main = (props: propsData) => {
     if (!searchString) {
       setFilteredList(emails);
     } else {
+      //@ts-ignore
       const filtered = emails.filter(email =>
         email.fullName.toLowerCase().includes(searchString.toLowerCase())
       );
@@ -398,8 +414,6 @@ const Main = (props: propsData) => {
                     <EllipsisHorizontalCircleIcon className="h-10 w-10 text-black" />
                   </div>
                 </div>
-
-
                 <div className=" flex flex-col space-y-1 pl-[1.1rem] mt-[0.5rem] w-full">
                   <div>
                     <p className="text-gray-500 text-lg font-bold">Inbox</p>
@@ -522,7 +536,7 @@ const Main = (props: propsData) => {
 
                       <div className={"flex flex-col space-y-1 mt-4 max-h-[36rem] ml-[-0.2rem] pr-2 overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin"}>
                         {/* //@ts-ignore */}
-                        {filteredList?.map((email) => (
+                        {filteredList?.map((email:any) => (
                           <div key={email.id} onClick={() => emailData(email)} className={currentIdData?.id == email?.id ? " bg-gray-200 rounded-md transition-all relative ease-in-out w-full duration-300" : "transition-all w-full relative ease-in-out duration-300"}>
 
                             <div className="flex no-scrollbar flex-row cursor-pointer  space-x-1 py-1 px-1 py-2 items-center relative">
@@ -537,7 +551,7 @@ const Main = (props: propsData) => {
                             {
                               //@ts-ignore
                               newIds.includes(email?.id) ? '' :
-                                <div className="absolute top-[0.9rem] left-[9.5rem] p-[0.2rem] bg-blue-600 rounded-md">
+                                <div className="absolute top-[0.9rem] left-[10.5rem] p-[0.2rem] bg-blue-600 rounded-md">
                                   <p className="text-white font-semibold text-xs">New</p>
                                 </div>
                             }
@@ -549,10 +563,13 @@ const Main = (props: propsData) => {
                       </div>
                     </div>
                   </div>
-
                   <div className="col-span-1 w-[60%] ">
                     <div className="flex flex-col space-y-6 pt-3  max-h-[45rem]   overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin">
-
+                      <div className="flex flex-row  p-4 space-x-2 items-start relative  border-b border-gray-300">
+                        <p className="text-lg text-black font-bold">{currentIdData?.subject}</p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col space-y-6 pt-3  max-h-[40rem]   overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin">
                       {currentIdData?.emailReplies?.map((email: any) => (
                         <div key={email?.id} className="flex flex-row  p-4 space-x-2 items-start relative">
                           <div className="mt-[-0.5rem]">
@@ -567,10 +584,7 @@ const Main = (props: propsData) => {
 
                           <div className=" border-b shadow border-gray-300 shadow-gray-200 w-full absolute left-[-0.5rem] bottom-[-0.8rem]"></div>
                         </div>
-
                       ))}
-
-
                     </div>
                   </div>
 
@@ -591,6 +605,7 @@ const Main = (props: propsData) => {
           <div className="border-l border-gray-300 shadow shadow-gray-200 z-100 h-[90%]  absolute top-[5.1rem] left-[44rem] ">
 
           </div>
+
 
           {compose &&
             <motion.div initial="hidden"
@@ -702,25 +717,48 @@ const Main = (props: propsData) => {
           {/* <PersonalAiTrainer fitZone={props?.fitZone}  /> */}
           {/* @ts-ignore */}
         </div>
-        {/* @ts-ignore */}
-        <div>
-          {/* @ts-ignore */}
-          {/* <RunoutPrediction /> */}
-          {/* @ts-ignore */}
-        </div>
-        {/* @ts-ignore */}
 
-        {/* @ts-ignore */}
+        <div>
+
+        </div>
+
       </main>
-      {/* <div className="max-w-7xl ml-1 lg:mx-auto flex flex-row justify-center">
-        <Nav />
-      </div> */}
-      {/* <div className="  max-w-7xl  lg:mx-auto  ">
-        <AudioComponent />
-      </div> */}
-      {/* @ts-ignore */}
+
     </div>
   );
 };
 
 export default Main;
+
+export async function getServerSideProps(context: any) {
+
+  let emailData = null;
+  const customConfig = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const emailRes = await axios.get(
+      `http://localhost:3001/emails`,
+      customConfig
+    );
+    //@ts-ignore
+    // if (emailRes?.status < "300") {
+
+      emailData = await emailRes.data;
+
+    // }
+  } catch (err) {
+    // Handle error
+    console.log(err);
+  }
+
+
+  return {
+    props: {
+      emails: emailData
+    },
+  };
+}
