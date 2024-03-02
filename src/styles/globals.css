@@ -93,10 +93,12 @@ main {
     transform: scale(0, 0.005);
     /* clip-path: circle(50%); */
   }
+
   50% {
     transform: scaleY(0.005);
     /* clip-path: circle(75%); */
   }
+
   100% {
     transform: scale(1, 1);
     /* clip-path: circle(100%); */
@@ -107,25 +109,30 @@ main {
   0% {
     clip-path: circle(75%);
   }
+
   100% {
     clip-path: circle(0%);
   }
 }
 
 .half.left {
-  border-right: 4px solid black; /* Adjust color and size as needed */
+  border-right: 4px solid black;
+  /* Adjust color and size as needed */
 }
 
 .hide-scroll::-webkit-scrollbar {
   display: none;
 }
+
 /* For Chrome, Safari, and Opera */
 .hide-scroll {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 
-.ck.ck-editor__main>.ck-editor__editable{
-  height:130px!important
+.ck.ck-editor__main>.ck-editor__editable {
+  height: 180px !important
 }

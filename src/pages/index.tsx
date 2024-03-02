@@ -11,10 +11,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from "next/dynamic";
 import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
+import LoadingDots from "../../icons/loading-dots";
 
 export interface propsData {
-  emails:any
+  emails: any
 }
 
 const animationVariants = {
@@ -347,15 +350,16 @@ const Main = (props: propsData) => {
   // }
   // ]
 
+  const [filteredList, setFilteredList] = useState(props?.emails);
   const emails = props?.emails;
 
   const [searchItem, setSearchItem] = useState("");
 
-  const [filteredList, setFilteredList] = useState(emails);
+
 
   const [currentId, setCurrentId] = useState(1);
 
-  const [currentIdData, setCurrentIdData] = useState(filteredList[0]);
+  const [currentIdData, setCurrentIdData] = useState(filteredList.length > 0 ? filteredList[0] : []);
 
   const filter = (searchString: any) => {
     setSearchItem(searchString);
@@ -385,9 +389,120 @@ const Main = (props: propsData) => {
   //@ts-ignore
   console.log('m-w', newIds);
 
+  const [from, setFrom] = useState('');
+  const [subject, setSubject] = useState('');
+  const [body, setBody] = useState('');
+  const [to, setTo] = useState('johnDoe@gmail.com');
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  //@ts-ignore
+
+  function delay(time: number) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
+
+  function extractFullNameFromEmail(email: any) {
+    // Split the email by the "@" symbol
+    const [localPart] = email.split('@');
+
+    // Assuming the format is "firstnameLastname", split where the case changes from lower to upper
+    const matches = localPart.match(/[A-Z][a-z]+|[a-z]+/g);
+
+    if (!matches) {
+      return 'Unknown Name'; // Return a default or throw an error if the format does not match
+    }
+
+    // Capitalize the first letter of each part and join them with a space
+    //@ts-ignore
+    const fullName = matches.map(namePart =>
+      namePart.charAt(0).toUpperCase() + namePart.slice(1).toLowerCase()
+    ).join(' ');
+
+    return fullName;
+  }
+
+  const router = useRouter();
+  // Call this function whenever you want to
+  // refresh props!
+  const refreshData = () => {
+    router.replace(router.asPath);
+    setFilteredList(props?.emails);
+  };
+
+
+
+  const [error, setError] = useState('');
+  //@ts-ignore
+  const onSubmit: SubmitHandler<> = async () => {
+    setSubmitting(true);
+    //post request
+
+    const payload = {
+      "fullName": extractFullNameFromEmail(from),
+      "body": body,
+      "toEmail": to,
+      "subject": subject,
+      "fromEmail": from,
+      "emailReplies": [
+
+      ]
+    }
+
+
+
+    console.log('payload', payload)
+    const customConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        // @ts-ignore
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        `http://localhost:3001/emails`,
+        payload,
+        customConfig
+      );
+      //@ts-ignore
+      if (res) {
+        delay(1000).then(() => {
+          setSuccess(true);
+          //   notify();
+          toast.success("Email Sent Successfully!", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            // draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setSubmitting(false);
+          setCompose(false);
+          refreshData();
+
+        });
+      } else {
+        //@ts-ignore
+        setError(res?.message);
+        setSuccess(false);
+        setSubmitting(false);
+      }
+      // Work with the response...
+    } catch (err) {
+      // Handle error
+      //@ts-ignore
+      setError(err?.response?.data?.message);
+      setSuccess(false);
+      setSubmitting(false);
+    }
+  };
+
   return (
     //@ts-ignore
     <div className="relative">
+      <ToastContainer className="font-bold text-sm text-black tracking-wide font-poppins" />
       {/* @ts-ignore */}
       <div className="relative">
         {/* @ts-ignore */}
@@ -536,7 +651,7 @@ const Main = (props: propsData) => {
 
                       <div className={"flex flex-col space-y-1 mt-4 max-h-[36rem] ml-[-0.2rem] pr-2 overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin"}>
                         {/* //@ts-ignore */}
-                        {filteredList?.map((email:any) => (
+                        {(searchItem.length == 0 ? emails : filteredList)?.map((email: any) => (
                           <div key={email.id} onClick={() => emailData(email)} className={currentIdData?.id == email?.id ? " bg-gray-200 rounded-md transition-all relative ease-in-out w-full duration-300" : "transition-all w-full relative ease-in-out duration-300"}>
 
                             <div className="flex no-scrollbar flex-row cursor-pointer  space-x-1 py-1 px-1 py-2 items-center relative">
@@ -551,7 +666,7 @@ const Main = (props: propsData) => {
                             {
                               //@ts-ignore
                               newIds.includes(email?.id) ? '' :
-                                <div className="absolute top-[0.9rem] left-[10.5rem] p-[0.2rem] bg-blue-600 rounded-md">
+                                <div className="absolute top-[0.9rem] right-[5.5rem] p-[0.2rem] bg-blue-600 rounded-md">
                                   <p className="text-white font-semibold text-xs">New</p>
                                 </div>
                             }
@@ -622,9 +737,9 @@ const Main = (props: propsData) => {
 
               </div>
 
-              <div className="flex flex-row space-x-2 p-4 items-center bg-white">
+              <div className="flex flex-row space-x-2 px-4 py-2 items-center bg-white">
                 <div><p className="text-gray-500 text-lg font-semibold">From : </p></div>
-                <input type='email' className="outline-none text-black w-[60%] font-semibold" placeholder="Enter Your Email" />
+                <input type='email' value={from} onChange={(e) => setFrom(e.target.value)} className="outline-none text-black w-[60%] font-semibold" placeholder="Enter Your Email" />
                 <div>
 
                 </div>
@@ -634,7 +749,7 @@ const Main = (props: propsData) => {
 
               </div>
 
-              <div className="flex flex-row space-x-2 p-4 items-center bg-white">
+              <div className="flex flex-row space-x-2 px-4 py-2 items-center bg-white">
                 <div><p className="text-gray-500 text-lg font-semibold">To : </p></div>
                 <div className="flex flex-row items-center space-x-2 p-1 pb-2 px-2 bg-gray-200 rounded-xl">
                   <div className="mt-1">
@@ -655,9 +770,9 @@ const Main = (props: propsData) => {
               </div>
 
 
-              <div className="flex flex-row space-x-2 p-4 items-center bg-white">
+              <div className="flex flex-row space-x-2 px-4 py-2 items-center bg-white">
                 <div><p className="text-gray-500 text-lg font-semibold">Subject : </p></div>
-                <input type='text' className="outline-none text-black w-[82%] font-semibold" placeholder="Enter Subject" />
+                <input type='text' value={subject} onChange={(e) => setSubject(e.target.value)} className="outline-none text-black w-[82%] font-semibold" placeholder="Enter Subject" />
               </div>
 
               <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[100%] ">
@@ -687,8 +802,16 @@ const Main = (props: propsData) => {
                 }}
               /> */}
                 <Editor
-                  value={"Test"}
-                  onChange={(v: any) => console.log(v)}
+                  value={body}
+                  // editor={ClassicEditor}
+                  //@ts-ignore
+                  onChange={(data) => {
+                    const newData = data.replace(/^<p>/, '').replace(/<\/p>$/, '');
+
+                    setBody(newData);
+
+                  }}
+
                 />
               </div>
 
@@ -697,11 +820,30 @@ const Main = (props: propsData) => {
               </div>
 
               <div className="p-4 bg-white">
-                <motion.div whileTap={{ scale: 0.99 }} className="flex mt-1 flex-row hover:opacity-80 justify-center  transition-all w-[20%] transform ease-in-out duration-300 space-x-2 items-center px-2 py-2 bg-black cursor-pointer rounded-lg">
+         
+                <motion.button
+                  whileTap={{ scale: 0.99 }}
+                  onClick={onSubmit}
+                  disabled={submitting}
+                  className={
+                    `flex mt-1 flex-row hover:opacity-80 justify-center font-semibold h-15 w-15 text-lg  w-[20%]  space-x-2 items-center px-2 py-2 bg-black cursor-pointer rounded-lg ` +
+                    (submitting &&
+                      " cursor-not-allowed animate-pulse opacity-70 h-15 w-15 py-5")
+                  }
+                >
+                  {submitting ? (
+                    <LoadingDots color="#ffffff" />
+                  ) : (
+                    <div className="flex flex-row items-center space-x-2">
+                      <p className="font-semibold text-lg" >Send</p>
+                      <PaperAirplaneIcon className="text-white h-5 w-5" />
+                    </div>
+                  )}
+                </motion.button>
 
-                  <p className="font-semibold text-lg" >Send</p>
-                  <PaperAirplaneIcon className="text-white h-5 w-5" />
-                </motion.div>
+
+
+
               </div>
             </motion.div>
           }
@@ -747,7 +889,7 @@ export async function getServerSideProps(context: any) {
     //@ts-ignore
     // if (emailRes?.status < "300") {
 
-      emailData = await emailRes.data;
+    emailData = await emailRes.data;
 
     // }
   } catch (err) {
