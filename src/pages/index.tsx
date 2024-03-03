@@ -350,20 +350,42 @@ const Main = (props: propsData) => {
   // }
   // ]
 
-  const [filteredList, setFilteredList] = useState(props?.emails);
-  const emails = props?.emails;
+  //@ts-ignore
+  let phishingEmails = [];
+  //@ts-ignore
+  let emails = [];
+  //@ts-ignore
+  props?.emails?.forEach(email => {
+    if (email.phishing) {
+      phishingEmails.push(email);
+    } else {
+      emails.push(email);
+    }
+  });
+
+  //@ts-ignore
+  const [filteredList, setFilteredList] = useState(emails);
+
+  //@ts-ignore
+  const [filteredList1, setFilteredList1] = useState(phishingEmails);
+  // const emails = props?.emails;
 
   const [searchItem, setSearchItem] = useState("");
 
+
+  const [searchItem1, setSearchItem1] = useState("");
 
 
   const [currentId, setCurrentId] = useState(1);
 
   const [currentIdData, setCurrentIdData] = useState(filteredList?.length > 0 ? filteredList[0] : []);
 
+  const [currentIdData1, setCurrentIdData1] = useState(filteredList1?.length > 0 ? filteredList1[0] : []);
+
   const filter = (searchString: any) => {
     setSearchItem(searchString);
     if (!searchString) {
+      //@ts-ignore
       setFilteredList(emails);
     } else {
       //@ts-ignore
@@ -374,9 +396,30 @@ const Main = (props: propsData) => {
     }
   }
 
+
+
+
+  const filter1 = (searchString1: any) => {
+    setSearchItem1(searchString1);
+    if (!searchString1) {
+      //@ts-ignore
+      setFilteredList1(phishingEmails);
+    } else {
+      //@ts-ignore
+      const filtered1 = phishingEmails.filter(email =>
+        email.fullName.toLowerCase().includes(searchString1.toLowerCase())
+      );
+      setFilteredList(filtered1);
+    }
+  }
+
   //@ts-ignore
   const [newIds, setNewIds] = useState([])
+
+  const [newIds1, setNewIds1] = useState([])
+
   const emailData = (email: any) => {
+    //@ts-ignore
     const ema = emails?.find((em: any) => em?.id === email?.id)
     //@ts-ignore
     setCurrentIdData(ema);
@@ -384,6 +427,19 @@ const Main = (props: propsData) => {
     console.log('as', ema?.id);
     //@ts-ignore
     setNewIds([...newIds, ema?.id]);
+
+  }
+
+
+  const emailData1 = (email: any) => {
+    //@ts-ignore
+    const ema = phishingEmails?.find((em: any) => em?.id === email?.id)
+    //@ts-ignore
+    setCurrentIdData1(ema);
+
+    console.log('as', ema?.id);
+    //@ts-ignore
+    setNewIds1([...newIds1, ema?.id]);
 
   }
   //@ts-ignore
@@ -437,7 +493,6 @@ const Main = (props: propsData) => {
   const onSubmit: SubmitHandler<> = async () => {
     setSubmitting(true);
     //post request
-
     const payload = {
       "fullName": extractFullNameFromEmail(from),
       "body": body,
@@ -445,17 +500,15 @@ const Main = (props: propsData) => {
       "subject": subject,
       "fromEmail": from,
       "emailReplies": [
-        {
-          "fullName": extractFullNameFromEmail(from),
-          "body": 'Teting',
-          "toEmail": from,
+        // {
+        //   "fullName": extractFullNameFromEmail(from),
+        //   "body": 'Teting',
+        //   "toEmail": from,
 
-          "fromEmail": to,
-        }
+        //   "fromEmail": to,
+        // }
       ]
     }
-
-
 
     console.log('payload', payload)
     const customConfig = {
@@ -468,6 +521,7 @@ const Main = (props: propsData) => {
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_END_POINT}`,
+        // `/api/email`,
         payload,
         customConfig
       );
@@ -543,13 +597,19 @@ const Main = (props: propsData) => {
                     <UserPlusIcon className={currentNav == 'Requests' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
                     <p className={currentNav == 'Requests' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Requests</p>
                   </div>
-                  <div onClick={() => setCurrentNav('Emails')} className={currentNav == 'Emails' ? "flex cursor-pointer flex-row space-x-4 p-3 items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out" : "flex cursor-pointer transition-all transform duration-200 ease-in-out p-3 w-full flex-row space-x-4 ml-2 items-center"}>
+                  <div onClick={() => setCurrentNav('Emails')} className={currentNav == 'Emails' ? "flex cursor-pointer flex-row space-x-4 p-3 relative items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out" : "flex cursor-pointer relative transition-all transform duration-200 ease-in-out p-3 w-full flex-row space-x-4 ml-2 items-center"}>
                     <EnvelopeIcon className={currentNav == 'Emails' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
                     <p className={currentNav == 'Emails' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Emails</p>
+                    <span className="absolute text-sm left-[6.8rem] top-[0.68rem] text-white font-bold px-2 py-1 bg-red-500 rounded-full animate-pulse">
+                      {emails?.length}
+                    </span>
                   </div>
                   <div onClick={() => setCurrentNav('Phishing Attempt')} className={currentNav == 'Phishing Attempt' ? "flex cursor-pointer flex-row space-x-4 p-3 items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out" : "flex cursor-pointer transition-all transform duration-200 ease-in-out p-3 w-full flex-row space-x-4 ml-2 items-center"}>
                     <ShieldExclamationIcon className={currentNav == 'Phishing Attempt' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
                     <p className={currentNav == 'Phishing Attempt' ? "text-white text-lg font-semibold" : "text-black text-lg font-semibold"}>Phishing Attempt</p>
+                    <span className="absolute text-sm left-[12.2rem] font-bold top-[0.68rem] text-white px-2 py-1 bg-red-500 rounded-full animate-pulse">
+                      {phishingEmails?.length}
+                    </span>
                   </div>
                   <div onClick={() => setCurrentNav('Texts')} className={currentNav == 'Texts' ? "flex cursor-pointer flex-row space-x-4 p-3 items-center bg-black rounded-lg w-full transition-all transform duration-200 ease-in-out" : "flex cursor-pointer transition-all transform duration-200 ease-in-out p-3 w-full flex-row space-x-4 ml-2 items-center"}>
                     <ChatBubbleLeftEllipsisIcon className={currentNav == 'Texts' ? "h-7 w-7 text-white" : "h-7 w-7 text-black"} />
@@ -625,95 +685,205 @@ const Main = (props: propsData) => {
                 </div>
               </div>
             </div>
-
-            <div className="col-span-3 ">
-              <div className="flex flex-col relative">
-                <div className="flex flex-row px-4 py-3 justify-between items-center">
-                  <div>
-                    <p className="text-black text-[1.5rem] font-bold">All Emails</p>
+            {currentNav == 'Emails' ?
+              <motion.div className="col-span-3 ">
+                <div className="flex flex-col relative">
+                  <div className="flex flex-row px-4 py-3 justify-between items-center">
+                    <div>
+                      <p className="text-black text-[1.5rem] font-bold">All Emails</p>
+                    </div>
+                    <motion.div onClick={() => setCompose(true)} whileTap={{ scale: 0.99 }} className="flex mt-1 flex-row hover:opacity-80 transition-all transform ease-in-out duration-300 space-x-2 items-center px-3 py-3 bg-black cursor-pointer rounded-xl">
+                      <PencilSquareIcon className="h-5 w-5 text-white font-semibold" />
+                      <p className="font-semibold text-lg" >Compose</p>
+                    </motion.div>
                   </div>
-                  <motion.div onClick={() => setCompose(true)} whileTap={{ scale: 0.99 }} className="flex mt-1 flex-row hover:opacity-80 transition-all transform ease-in-out duration-300 space-x-2 items-center px-3 py-3 bg-black cursor-pointer rounded-xl">
-                    <PencilSquareIcon className="h-5 w-5 text-white font-semibold" />
-                    <p className="font-semibold text-lg" >Compose</p>
-                  </motion.div>
-                </div>
 
-                <div className="flex flex-row">
-                  <div className="col-span-1 p-4 w-[40%]">
-                    <div className="flex flex-col">
-                      <div className="relative ">
-                        <p className="text-black text-xl font-bold">Inbox</p>
-                        <span className="absolute text-sm left-[3.7rem] top-0 text-white px-2 py-1 bg-red-500 rounded-lg">
-                          {emails?.length}
-                        </span>
-                        <p className="text-gray-500 font-semibold text-md mt-1">Maximizing Efficiency</p>
-                      </div>
-                      <div className="flex flex-row space-x-2 items-center mt-4 rounded-md  px-3 py-2 border border-gray-400">
-                        <MagnifyingGlassIcon className="text-black font-bold h-5 w-5" />
-                        <input onChange={(e: any) => filter(e.target.value)} value={searchItem} type='text' className="outline-none text-black w-full font-semibold" placeholder="Search" />
-                        {searchItem.length > 0 &&
-                          <XMarkIcon onClick={() => { setSearchItem(''), setFilteredList(emails) }} className="text-black h-5 w-5 font-semibold cursor-pointer" />}
-                      </div>
+                  <div className="flex flex-row">
+                    <div className="col-span-1 p-4 w-[40%]">
+                      <div className="flex flex-col">
+                        <div className="relative ">
+                          <p className="text-black text-xl font-bold">Inbox</p>
+                          <span className="absolute text-sm left-[3.7rem] top-0 text-white px-2 py-1 bg-red-500 rounded-lg">
+                            {emails?.length}
+                          </span>
+                          <p className="text-gray-500 font-semibold text-md mt-1">Maximizing Efficiency</p>
+                        </div>
+                        <div className="flex flex-row space-x-2 items-center mt-4 rounded-md  px-3 py-2 border border-gray-400">
+                          <MagnifyingGlassIcon className="text-black font-bold h-5 w-5" />
+                          <input onChange={(e: any) => filter(e.target.value)} value={searchItem} type='text' className="outline-none text-black w-full font-semibold" placeholder="Search" />
+                          {searchItem.length > 0 &&
+                            //@ts-ignore
+                            <XMarkIcon onClick={() => { setSearchItem(''), setFilteredList(emails) }} className="text-black h-5 w-5 font-semibold cursor-pointer" />}
+                        </div>
 
-                      <div className={"flex flex-col space-y-1 mt-4 max-h-[36rem] ml-[-0.2rem] pr-2 overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin"}>
-                        {/* //@ts-ignore */}
-                        {(searchItem.length == 0 ? emails : filteredList)?.map((email: any) => (
-                          <div key={email.id} onClick={() => emailData(email)} className={currentIdData?.id == email?.id ? " bg-gray-200 rounded-md transition-all relative ease-in-out w-full duration-300" : "transition-all w-full relative ease-in-out duration-300"}>
+                        <div className={"flex flex-col space-y-1 mt-4 max-h-[36rem] ml-[-0.2rem] pr-2 overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin"}>
 
-                            <div className="flex no-scrollbar flex-row cursor-pointer  space-x-1 py-1 px-1 py-2 items-center relative">
-                              <UserCircleIcon className="h-16 w-16 text-black font-semibold" />
-                              <div className="flex flex-col space-y-[0.1rem]">
-                                <p className="text-black font-bold text-md">{email?.fullName}</p>
-                                {/* @ts-ignore  */}
-                                <p className={newIds.includes(email?.id) ? "text-gray-500 font-bold text-sm" : "text-black font-bold text-sm"}>{email?.body?.slice(0, 36)} ...</p>
+                          {(searchItem.length == 0 ?
+                            //@ts-ignore
+                            emails : filteredList)?.map((email: any) => (
+                              <div key={email.id} onClick={() => emailData(email)} className={currentIdData?.id == email?.id ? " bg-gray-200 rounded-md transition-all relative ease-in-out w-full duration-300" : "transition-all w-full relative ease-in-out duration-300"}>
 
-                              </div>
-                            </div>
-                            {
-                              //@ts-ignore
-                              newIds.includes(email?.id) ? '' :
-                                <div className="absolute top-[0.9rem] right-[5.5rem] p-[0.2rem] bg-blue-600 rounded-md">
-                                  <p className="text-white font-semibold text-xs">New</p>
+                                <div className="flex no-scrollbar flex-row cursor-pointer  space-x-1 py-1 px-1 py-2 items-center relative">
+                                  <UserCircleIcon className="h-16 w-16 text-black font-semibold" />
+                                  <div className="flex flex-col space-y-[0.1rem]">
+                                    <p className="text-black font-bold text-md">{email?.fullName}</p>
+                                    {/* @ts-ignore  */}
+                                    <p className={newIds.includes(email?.id) ? "text-gray-500 font-bold text-sm" : "text-black font-bold text-sm"}>{email?.body?.slice(0, 36)} ...</p>
+
+                                  </div>
                                 </div>
-                            }
-                            <div className="absolute top-4 left-[18rem]">
-                              <p className="text-gray-600 font-semibold text-sm">{email?.time}</p>
+                                {
+                                  //@ts-ignore
+                                  newIds.includes(email?.id) ? '' :
+                                    <div className="absolute top-[0.9rem] right-[5.5rem] p-[0.2rem] bg-blue-600 rounded-md">
+                                      <p className="text-white font-semibold text-xs">New</p>
+                                    </div>
+                                }
+                                <div className="absolute top-4 left-[18rem]">
+                                  <p className="text-gray-600 font-semibold text-sm">{email?.time}</p>
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-span-1 w-[60%] ">
+                      <div className="flex flex-col space-y-6 pt-3  max-h-[45rem]    overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin">
+                        <div className="flex flex-row  p-4 space-x-2 items-start relative  border-b border-gray-300">
+                          <p className="text-lg text-black font-bold">{currentIdData?.subject}</p>
+                        </div>
+                      </div>
+                      <div className="flex flex-col space-y-6 pt-3  max-h-[40rem]   overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin">
+                        {currentIdData?.emailReplies?.map((email: any) => (
+                          <div key={email?.id} className="flex flex-row  p-4 space-x-2 items-start relative">
+                            <div className="mt-[-0.5rem]">
+                              <UserCircleIcon className="h-16 w-16 text-black" />
                             </div>
+
+                            <div className="flex flex-col space-y-[0.1rem] relative">
+                              <p className="text-black font-bold text-md">{email?.fromEmail}</p>
+                              <p className="text-gray-700 font-semibold text-sm relative">to {email?.toEmail} <span className="absolute"><ChevronDownIcon className="h-5 w-5 font-bold text-gray-400 ml-1 pt-[0.03rem]" /></span> </p>
+                              <p className="text-black text-md font-semibold">{email?.body}</p>
+                            </div>
+
+                            <div className=" border-b shadow border-gray-300 shadow-gray-200 w-full absolute left-[-0.5rem] bottom-[-0.8rem]"></div>
                           </div>
                         ))}
                       </div>
                     </div>
-                  </div>
-                  <div className="col-span-1 w-[60%] ">
-                    <div className="flex flex-col space-y-6 pt-3  max-h-[45rem]   overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin">
-                      <div className="flex flex-row  p-4 space-x-2 items-start relative  border-b border-gray-300">
-                        <p className="text-lg text-black font-bold">{currentIdData?.subject}</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col space-y-6 pt-3  max-h-[40rem]   overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin">
-                      {currentIdData?.emailReplies?.map((email: any) => (
-                        <div key={email?.id} className="flex flex-row  p-4 space-x-2 items-start relative">
-                          <div className="mt-[-0.5rem]">
-                            <UserCircleIcon className="h-16 w-16 text-black" />
-                          </div>
 
-                          <div className="flex flex-col space-y-[0.1rem] relative ">
-                            <p className="text-black font-bold text-md">{email?.fromEmail}</p>
-                            <p className="text-gray-700 font-semibold text-sm relative">to {email?.toEmail} <span className="absolute"><ChevronDownIcon className="h-5 w-5 font-bold text-gray-400 ml-1 pt-[0.03rem]" /></span> </p>
-                            <p className="text-black text-md font-semibold">{email?.body}</p>
-                          </div>
-
-                          <div className=" border-b shadow border-gray-300 shadow-gray-200 w-full absolute left-[-0.5rem] bottom-[-0.8rem]"></div>
-                        </div>
-                      ))}
-                    </div>
                   </div>
 
                 </div>
 
-              </div>
+              </motion.div>
 
-            </div>
+              :
+
+
+              <motion.div className="col-span-3 ">
+                <div className="flex flex-col relative">
+                  <div className="flex flex-row px-4 py-3 justify-between items-center">
+                    <div>
+                      <p className="text-black text-[1.5rem] font-bold">Phishing Attempt</p>
+                    </div>
+                    <motion.div onClick={() => setCompose(true)} whileTap={{ scale: 0.99 }} className="flex mt-1 flex-row hover:opacity-80 transition-all transform ease-in-out duration-300 space-x-2 items-center px-3 py-3 bg-black cursor-pointer rounded-xl">
+                      <PencilSquareIcon className="h-5 w-5 text-white font-semibold" />
+                      <p className="font-semibold text-lg" >Compose</p>
+                    </motion.div>
+                  </div>
+
+                  <div className="flex flex-row">
+                    <div className="col-span-1 p-4 w-[40%]">
+                      <div className="flex flex-col">
+                        <div className="relative ">
+                          <p className="text-black text-xl font-bold">Phishing Emails</p>
+                          <span className="absolute text-sm left-[9.5rem] top-0 text-white px-2 py-1 bg-red-500 rounded-lg">
+                            {phishingEmails?.length}
+                          </span>
+                          <p className="text-gray-500 font-semibold text-md mt-1">Maximizing Efficiency</p>
+                        </div>
+                        <div className="flex flex-row space-x-2 items-center mt-4 rounded-md  px-3 py-2 border border-gray-400">
+                          <MagnifyingGlassIcon className="text-black font-bold h-5 w-5" />
+                          <input onChange={(e: any) => filter1(e.target.value)} value={searchItem1} type='text' className="outline-none text-black w-full font-semibold" placeholder="Search" />
+                          {searchItem1.length > 0 &&
+                            //@ts-ignore
+                            <XMarkIcon onClick={() => { setSearchItem1(''), setFilteredList1(phishingEmails) }} className="text-black h-5 w-5 font-semibold cursor-pointer" />}
+                        </div>
+
+                        <div className={"flex flex-col space-y-1 mt-4 max-h-[36rem] ml-[-0.2rem] pr-2 overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin"}>
+
+                          {(searchItem1.length == 0 ?
+                            //@ts-ignore
+                            phishingEmails : filteredList1)?.map((email: any) => (
+                              <div key={email.id} onClick={() => emailData1(email)} className={currentIdData1?.id == email?.id ? " bg-gray-200 rounded-md transition-all relative ease-in-out w-full duration-300" : "transition-all w-full relative ease-in-out duration-300"}>
+
+                                <div className="flex no-scrollbar flex-row cursor-pointer  space-x-1 py-1 px-1 py-2 items-center relative">
+                                  <UserCircleIcon className="h-16 w-16 text-black font-semibold" />
+                                  <div className="flex flex-col space-y-[0.1rem]">
+                                    <p className="text-black font-bold text-md">{email?.fullName}</p>
+                                    {/* @ts-ignore  */}
+                                    <p className={newIds1.includes(email?.id) ? "text-gray-500 font-bold text-sm" : "text-black font-bold text-sm"}>{email?.body?.slice(0, 36)} ...</p>
+
+                                  </div>
+                                </div>
+                                {
+                                  //@ts-ignore
+                                  newIds1.includes(email?.id) ? '' :
+                                    <div className="absolute top-[0.9rem] right-[5.5rem] p-[0.2rem] bg-blue-600 rounded-md">
+                                      <p className="text-white font-semibold text-xs">New</p>
+                                    </div>
+                                }
+                                <div className="absolute top-4 left-[18rem]">
+                                  <p className="text-gray-600 font-semibold text-sm">{email?.time}</p>
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-span-1 w-[60%] ">
+                      <div className="flex flex-col space-y-6 pt-3  max-h-[45rem]    overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin">
+                        <div className="flex flex-row  p-4 space-x-2 items-start relative  border-b border-gray-300">
+                          <p className="text-lg text-black font-bold">{currentIdData1?.subject}</p>
+                        </div>
+                      </div>
+                      <div className="flex flex-col space-y-6 pt-3  max-h-[40rem]   overflow-y-scroll scrollbar-w-[1px] scrollbar-thumb-h-[1rem] scrollbar-thin">
+                        {currentIdData1?.emailReplies?.map((email: any) => (
+                          <div key={email?.id} className="flex flex-row  p-4 space-x-2 items-start relative">
+                            <div className="mt-[-0.5rem]">
+                              <UserCircleIcon className="h-16 w-16 text-black" />
+                            </div>
+
+                            <div className="flex flex-col space-y-[0.1rem] relative">
+                              <p className="text-black font-bold text-md">{email?.fromEmail}</p>
+                              <p className="text-gray-700 font-semibold text-sm relative">to {email?.toEmail} <span className="absolute"><ChevronDownIcon className="h-5 w-5 font-bold text-gray-400 ml-1 pt-[0.03rem]" /></span> </p>
+                              <p className="text-black text-md font-semibold">{email?.body}</p>
+                            </div>
+
+                            <div className=" border-b shadow border-gray-300 shadow-gray-200 w-full absolute left-[-0.5rem] bottom-[-0.8rem]"></div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </motion.div>
+
+            }
+
+
+
+
+
+
+
+
+
+
           </motion.div>
           <div className="border-b border-gray-300 shadow shadow-gray-200 z-100 w-[75%] left-[20rem]  absolute top-[5rem]">
           </div>
@@ -890,6 +1060,7 @@ export async function getServerSideProps(context: any) {
   try {
     const emailRes = await axios.get(
       `${process.env.NEXT_PUBLIC_API_END_POINT}`,
+      // '/api/email`',
       customConfig
     );
     //@ts-ignore
