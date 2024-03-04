@@ -728,7 +728,7 @@ const Main = (props: propsData) => {
                                   <div className="flex flex-col space-y-[0.1rem]">
                                     <p className="text-black font-bold text-md">{email?.fullName}</p>
                                     {/* @ts-ignore  */}
-                                    <p className={newIds.includes(email?.id) ? "text-gray-500 font-bold text-sm" : "text-black font-bold text-sm"}>{email?.body?.slice(0, 36)} ...</p>
+                                    <p className={newIds.includes(email?.id) ? "text-gray-500 font-bold text-sm" : "text-black font-bold text-sm"}>{email?.body?.slice(0, 30)} ...</p>
 
                                   </div>
                                 </div>
@@ -823,7 +823,7 @@ const Main = (props: propsData) => {
                                   <div className="flex flex-col space-y-[0.1rem]">
                                     <p className="text-black font-bold text-md">{email?.fullName}</p>
                                     {/* @ts-ignore  */}
-                                    <p className={newIds1.includes(email?.id) ? "text-gray-500 font-bold text-sm" : "text-black font-bold text-sm"}>{email?.body?.slice(0, 36)} ...</p>
+                                    <p className={newIds1.includes(email?.id) ? "text-gray-500 font-bold text-sm" : "text-black font-bold text-sm"}>{email?.body?.slice(0, 30)} ...</p>
 
                                   </div>
                                 </div>
@@ -915,7 +915,7 @@ const Main = (props: propsData) => {
 
               <div className="flex flex-row space-x-2 px-4 py-2 items-center bg-white">
                 <div><p className="text-gray-500 text-lg font-semibold">From : </p></div>
-                <input type='email' value={from} onChange={(e) => setFrom(e.target.value)} className="outline-none text-black w-[60%] font-semibold" placeholder="Enter Your Email" />
+                <input type='email' value={from} onChange={(e) => setFrom(e.target.value)} className="outline-none text-black w-[85%] font-semibold" placeholder="Enter Your Email" />
                 <div>
 
                 </div>
