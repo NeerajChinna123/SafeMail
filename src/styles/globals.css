@@ -84,7 +84,7 @@ main {
 
   width: 100%;
   transform: scale(0, 0);
-  animation: animate 0.6s ease-in forwards 3s;
+  animation: animate 0.6s ease-in forwards 4.5s;
   overflow: hidden;
 }
 

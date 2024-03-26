@@ -5,8 +5,6 @@ import { FaDumbbell } from "react-icons/fa";
 import { GiMeditation } from "react-icons/gi";
 import { TbMoneybag } from "react-icons/tb";
 
-
-
 const animationVariants = {
     initial: { y: -15, opacity: 0 }, // Starting position off-screen (above)
     animate: { y: 0, opacity: 1 }, // Ending position (on-screen)
@@ -14,7 +12,7 @@ const animationVariants = {
   
   const animationTransition = {
     duration: 0.9, // Duration of the animation
-    delay: 5.8, // Delay before the animation starts (in seconds)
+    delay: 6, // Delay before the animation starts (in seconds)
   };
   
 function Nav() {
