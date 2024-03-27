@@ -258,19 +258,16 @@ const Main = (props: propsData) => {
 
 
           <motion.div initial="initial"
-              animate="animate"
-              variants={animationVariants}
-              transition={animationTransition} className="absolute bottom-[22.8rem] left-[6rem] ">
-            <motion.div className="relative backdrop-blur-lg bg-white/20 w-[47.5rem] h-[1rem] rounded-full ">
-              <motion.div style={{width:`${progress}%`}} className={`absolute bg-cyan-500 transition-all transform duration-300 ease-in-out  h-[1rem] rounded-full `}>
+            animate="animate"
+            variants={animationVariants}
+            transition={animationTransition} className="absolute bottom-[22.8rem] left-[6rem] ">
+            <motion.div className="relative backdrop-blur-lg bg-white/20 w-[47.5rem] h-[0.9rem] rounded-full ">
+              <motion.div style={{ width: `${progress}%` }} className={`absolute bg-cyan-500 transition-all ease-out duration-1000 ease-in-out  h-[0.9rem] rounded-full `}>
 
               </motion.div>
             </motion.div>
           </motion.div>
         </div>
-
-
-
 
       </main>
 
