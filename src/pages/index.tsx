@@ -2,7 +2,7 @@
 import AfterEffectsVideo from "../components/AfterEffects";
 import { BannerType, FitZoneType } from "../../typings";
 import { motion, AnimatePresence } from "framer-motion";
-import { HomeIcon, UserIcon, BellIcon, PlusCircleIcon, SpeakerWaveIcon, PlayIcon } from '@heroicons/react/24/solid';
+import { HomeIcon, UserIcon, BellIcon, PlusCircleIcon, SpeakerWaveIcon, PlayIcon, CheckBadgeIcon } from '@heroicons/react/24/solid';
 import { useState, useEffect, useRef } from "react";
 
 import { Squares2X2Icon, QueueListIcon, MagnifyingGlassIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
@@ -230,29 +230,48 @@ const Main = (props: propsData) => {
             transition={animationTransition}
 
             className="absolute  z-[-50] top-[-1.9rem] left-[6rem]">
-            <div className=" relative p-6 backdrop-blur-lg bg-white/10 rounded-3xl">
-
-
+            <div className=" relative p-6 flex flex-row backdrop-blur-lg bg-white/10 rounded-3xl">
               <video ref={videoRef} muted autoPlay loop className=" w-[45rem] rounded-lg ">
                 <source src="/Digital-age-demo.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
 
+
               <div className="absolute top-10 left-10 backdrop-blur-lg bg-black/40 p-2 rounded-3xl">
                 <p className="text-white font-bold text-md tracking-wide">@PeterMichaels</p>
               </div>
-
-
-              <div className="z-[100] absolute top-11 cursor-pointer right-10 backdrop-blur-lg bg-black/40 p-2 rounded-3xl">
+              <div className="z-[100] absolute top-10 cursor-pointer left-[43.2rem] backdrop-blur-lg bg-black/40 p-2 rounded-3xl">
                 <SpeakerWaveIcon className="h-4 w-4 cursor-pointer text-white font-semibold" />
               </div>
-
               <div className="z-[100] absolute bottom-11 cursor-pointer left-10 backdrop-blur-lg bg-black/40 p-3 rounded-3xl">
                 <div className="flex flex-row items-center  justify-center space-x-1">
                   <PlayIcon className="h-5 w-5 cursor-pointer text-white font-semibold" />
                   <p className="text-white font-bold text-lg tracking-wider">4k</p>
                 </div>
               </div>
+
+
+              <div className="ml-6 mt-1">
+                <div className="flex flex-col space-y-2">
+                  <div className="flex flex-row space-x-4 items-center">
+                    <div>
+                      <img src="./Peter.jpeg" className="h-[4rem] w-[4rem] rounded-full" />
+                    </div>
+
+                    <div>
+                      <p className="text-[1.3rem] font-bold">
+                        Peter Michaels
+                      </p>
+                    </div>
+
+                    <div>
+                      <CheckBadgeIcon className="h-8 w-8 text-blue-600 " />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
             </div>
           </motion.div>
 
@@ -260,8 +279,8 @@ const Main = (props: propsData) => {
           <motion.div initial="initial"
             animate="animate"
             variants={animationVariants}
-            transition={animationTransition} className="absolute bottom-[22.8rem] left-[6rem] ">
-            <motion.div className="relative backdrop-blur-lg bg-white/20 w-[47.5rem] h-[0.9rem] rounded-full ">
+            transition={animationTransition} className="absolute bottom-[22.8rem] left-[7rem] ">
+            <motion.div className="relative backdrop-blur-lg bg-white/20 w-[45.5rem] h-[0.9rem] rounded-full ">
               <motion.div style={{ width: `${progress}%` }} className={`absolute bg-cyan-500 transition-all ease-out duration-1000 ease-in-out  h-[0.9rem] rounded-full `}>
 
               </motion.div>
