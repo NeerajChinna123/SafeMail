@@ -6,6 +6,7 @@ import { HomeIcon, UserIcon, BellIcon, PlusCircleIcon, SpeakerWaveIcon, PlayIcon
 import { useState, useEffect, useRef } from "react";
 
 import { Squares2X2Icon, QueueListIcon, MagnifyingGlassIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
+import ActivityTabs from "@/Containers/ActivityTabs";
 export interface propsData {
   banner: [BannerType];
   fitZone: [FitZoneType];
@@ -26,6 +27,8 @@ const Main = (props: propsData) => {
   const [navSelect, setNavSelect] = useState(false);
 
   const [navSelect1, setNavSelect1] = useState(false);
+
+  const [navSelect2, setNavSelect2] = useState(false);
 
   const [progress, setProgress] = useState(0); // Progress state
 
@@ -110,7 +113,7 @@ const Main = (props: propsData) => {
         {/* @ts-ignore */}
       </div>
       {/* @ts-ignore */}
-      <main onClick={() => videoPlay} className="bg-[url('/bg-6.jpg')]   bg-cover  min-h-screen">
+      <main onClick={() => videoPlay} className="bg-[url('/bg-8.jpg')]   bg-cover  min-h-screen">
         <div className=" min-h-screen relative max-w-[100rem] mx-auto mt-[15rem]">
           <AnimatePresence>
             <motion.div initial="initial"
@@ -122,7 +125,15 @@ const Main = (props: propsData) => {
                   setNavSelect(!navSelect); setTimeout(() => {
                     setNavSelect1(!navSelect)
                   }, navSelect1 == false ? 400 : 0);
-                }}
+
+                  setTimeout(() => {
+                    setNavSelect2(!navSelect)
+                  }, navSelect2 == false ? 0 : 600);
+                }
+               
+              }
+              
+              
                 className={navSelect ? "flex flex-col w-[12.5%] h-[90%] transition-all transform duration-700 ease-in-out  justify-center  pt-6 pb-6 pl-[0.6rem] pr-[0.6rem]  rounded-3xl space-y-[0.4rem] backdrop-blur-lg bg-white/10 " : "flex flex-col w-[4%] transition-all transform duration-700 ease-in-out  justify-center  pt-6 pb-4 pl-[0.6rem] pr-[0.6rem] rounded-3xl space-y-[0.4rem] backdrop-blur-lg bg-white/10 "}>
                 <div>
                   <img src='/MAinLogo.svg' className={navSelect ? "h-[4rem]  hover:cursor-pointer mb-1 w-[11rem] transition-all transform duration-300 ease-in-out" : "h-[3rem]  transition-all transform duration-300 ease-in-out hover:cursor-pointer mb-1 w-[10rem]"} />
@@ -262,8 +273,8 @@ const Main = (props: propsData) => {
             variants={animationVariants}
             transition={animationTransition}
 
-            className="absolute  z-[-50] top-[-1.9rem] left-[6rem]">
-            <div className=" relative p-6 flex flex-row backdrop-blur-lg bg-black/30 w-[86%] rounded-3xl">
+            className={navSelect2 ?"absolute  z-[-50] top-[-1.9rem] left-[6rem]":"absolute  z-[100] top-[-1.9rem] left-[6rem]"}>
+            <div className=" relative p-6 flex flex-row backdrop-blur-lg bg-white/10 w-[86%] rounded-3xl">
               <video id="myVideo" ref={videoRef} muted autoPlay loop className=" w-[45rem] rounded-lg ">
                 <source src="/Digital-age-demo.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
@@ -303,7 +314,7 @@ const Main = (props: propsData) => {
                     </div>
 
                     <div className="absolute right-2">
-                      <div className=" backdrop-blur-lg p-1 rounded-full">
+                      <div className=" backdrop-blur-lg p-1 bg-black/10 rounded-full">
                         <EllipsisHorizontalIcon className="text-white h-8 w-8" />
                       </div>
                     </div>
@@ -311,9 +322,13 @@ const Main = (props: propsData) => {
 
 
                   <div className="pl-2 pt-3">
-                    <p className="text-white text-lg font-semibold w-[90%]">Modern tools for a modern world! Make sure you sign up today! www.digitalage.com 
-                    <span className="text-cyan-200">#freedom #freespeechmatters #making #memories</span></p>
+                    <p className="text-white text-lg font-semibold w-[90%]">Modern tools for a modern world! Make sure you sign up today! www.digitalage.com
+                      <span className="text-cyan-200">#freedom #freespeechmatters #making #memories</span></p>
                   </div>
+
+
+
+                  <ActivityTabs />
                 </div>
 
               </div>
@@ -325,7 +340,7 @@ const Main = (props: propsData) => {
           <motion.div initial="initial"
             animate="animate"
             variants={animationVariants}
-            transition={animationTransition} className="absolute bottom-[25.8rem] left-[7rem] ">
+            transition={animationTransition} className="absolute bottom-[26.8rem] left-[7rem] ">
             <motion.div className="relative backdrop-blur-lg bg-white/20 w-[45.5rem] h-[0.9rem] rounded-full ">
               <motion.div style={{ width: `${progress}%` }} className={`absolute bg-cyan-500 transition-all ease-out duration-1000 ease-in-out  h-[0.9rem] rounded-full `}>
 
