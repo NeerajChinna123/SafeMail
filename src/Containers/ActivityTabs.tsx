@@ -1,5 +1,7 @@
 import { ArrowPathRoundedSquareIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
+import { ArrowPathRoundedSquareIcon as A3, ChatBubbleLeftRightIcon as C3 } from "@heroicons/react/24/solid";
 import { HeartIcon } from "@heroicons/react/24/solid";
+import { HeartIcon as H2 } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 
 
@@ -29,9 +31,9 @@ export default function ActivityTabs() {
         function setTabPosition() {
             const currentTab = tabsRef.current[activeTabIndex];
             //@ts-ignore
-            setTabUnderlineLeft(currentTab?.offsetLeft ?? 0);
+            setTabUnderlineLeft(currentTab?.offsetLeft - 20 ?? 0);
             //@ts-ignore
-            setTabUnderlineWidth(currentTab?.clientWidth ?? 0);
+            setTabUnderlineWidth(currentTab?.clientWidth * 1.16 ?? 0);
         }
 
         setTabPosition();
@@ -40,21 +42,37 @@ export default function ActivityTabs() {
         return () => window.removeEventListener("resize", setTabPosition);
     }, [activeTabIndex]);
 
+
+    const likes = [
+        {
+            id: 1,
+            userName: '@Neeraj',
+            fullName: 'Neeraj Baipureddy',
+
+        },
+        {
+
+        }
+    ]
+
     return (
-        <div className="absolute mt-4 z-[1000] lg:mt-12 w-[30.5rem] top-[14rem] right-[2rem] ">
+        <div className="absolute mt-[0.2rem] z-[1000] lg:mt-12 w-[34rem] top-[14rem] right-[-0.88rem] ">
             <div className="relative">
-                <div className="absolute left-[-0.7rem] top-[0.4rem]">
-                        <HeartIcon className="h-7 w-7 text-cyan-400" />
+                <div className="absolute left-[0.2rem] top-[0.4rem] transition-all transform duration-500 ease-in-out">
+                    {activeTabIndex == 0 ? <HeartIcon className="h-7 w-7 text-cyan-400 transition-all transform duration-500 ease-in-out" /> : <H2 className="h-7 w-7 text-white transition-all transform duration-500 ease-in-out" />}
+
                 </div>
 
-                <div className="absolute left-[9.4rem] top-[0.4rem]">
-                        <ChatBubbleLeftRightIcon className="h-7 w-7" />
+                <div className="absolute left-[10.4rem] top-[0.4rem]">
+
+                    {activeTabIndex == 1 ? <C3 className="h-7 w-7 text-cyan-400 transition-all transform duration-500 ease-in-out" /> : <ChatBubbleLeftRightIcon className="h-7 w-7 text-white transition-all transform duration-500 ease-in-out" />}
+
                 </div>
 
-                <div className="absolute left-[21.4rem] top-[0.4rem]">
-                        <ArrowPathRoundedSquareIcon className="h-7 w-7" />
+                <div className="absolute left-[22.1rem] top-[0.4rem]">
+                    {activeTabIndex == 2 ? <ArrowPathRoundedSquareIcon className="h-7 w-7 text-cyan-400 transition-all transform duration-500 ease-in-out" /> : <A3 className="h-7 w-7 text-white transition-all transform duration-500 ease-in-out" />}
                 </div>
-                <div className="flex space-x-2  justify-center pb-[0.2rem] md:pb-[0.3rem] border-b-2 border-gray-200">
+                <div className="flex space-x-2 w-[32.5rem]  justify-center pb-[0.2rem] md:pb-[0.3rem] border-b-2 border-gray-200">
                     {tabsData.map((tab, idx) => {
                         return (
                             <div className="px-[1rem]">
@@ -63,9 +81,9 @@ export default function ActivityTabs() {
                                     //@ts-ignore
                                     ref={(el) => (tabsRef.current[idx] = el)}
                                     className={
-                                        `pt-2 pb-3  text-md w-[9rem] text-white font-poppins tracking-wide  ` +
+                                        `pt-2 pb-3  text-md w-[9rem] text-white font-semibold transition transform duration-500 ease-in-out font-poppins tracking-wide  ` +
                                         `${tabsRef.current[idx] == tabsRef.current[activeTabIndex] &&
-                                        "text-cyan-300 font-semibold"
+                                        "text-cyan-200 font-semibold"
                                         }`
                                     }
                                     onClick={() => setActiveTabIndex(idx)}
