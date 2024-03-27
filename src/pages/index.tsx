@@ -2,7 +2,7 @@
 import AfterEffectsVideo from "../components/AfterEffects";
 import { BannerType, FitZoneType } from "../../typings";
 import { motion, AnimatePresence } from "framer-motion";
-import { HomeIcon, UserIcon, BellIcon, PlusCircleIcon, SpeakerWaveIcon, PlayIcon, CheckBadgeIcon } from '@heroicons/react/24/solid';
+import { HomeIcon, UserIcon, BellIcon, PlusCircleIcon, SpeakerWaveIcon, PlayIcon, CheckBadgeIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
 import { useState, useEffect, useRef } from "react";
 
 import { Squares2X2Icon, QueueListIcon, MagnifyingGlassIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
@@ -32,18 +32,47 @@ const Main = (props: propsData) => {
   const [rem, setRem] = useState(0);
   const videoRef = useRef(null); // Reference to the video element
 
+  const videoPlay = () => {
+    //@ts-ignore
+    videoRef.current.play();
+  }
+
   useEffect(() => {
     // Function to update progress
     const updateProgress = () => {
       //@ts-ignore
+
+
+
+
+      //@ts-ignore
+
+
+      setTimeout(() => {
+        var vide = document.getElementById('myVideo');
+        //@ts-ignore
+        vide.muted = false;
+      }, 5600);
+
+
+
+
       const video = videoRef.current;
+      if (videoRef.current) {
+        //@ts-ignore
+        videoRef.current.play()
+          //@ts-ignore
+          .catch(error => {
+            // Autoplay was prevented.
+            // Show a "Play" button so that the user can start playback.
+            console.error('Video playback failed', error);
+          });
+      }
       //@ts-ignore
       const value = (video.currentTime / video.duration) * 100;
       //@ts-ignore
       setProgress(value.toFixed(2));
-
       const width = 47.5;
-
       setRem((progress / 100) * width);
       // Update state, keep only two decimal places
     };
@@ -60,6 +89,13 @@ const Main = (props: propsData) => {
   }, []); // Empty dependency array means this effect runs once on mount
 
 
+  // var video = document.getElementById('myVideo');
+
+  // //@ts-ignore
+  // video.addEventListener('click', function () {
+  //   //@ts-ignore
+  //   video.muted = !video.muted;
+  // });
 
   return (
     //@ts-ignore
@@ -74,7 +110,7 @@ const Main = (props: propsData) => {
         {/* @ts-ignore */}
       </div>
       {/* @ts-ignore */}
-      <main className="bg-[url('/bg-2.jpeg')]   bg-cover  min-h-screen">
+      <main onClick={() => videoPlay} className="bg-[url('/bg-6.jpg')]   bg-cover  min-h-screen">
         <div className=" min-h-screen relative max-w-[100rem] mx-auto mt-[15rem]">
           <AnimatePresence>
             <motion.div initial="initial"
@@ -87,7 +123,7 @@ const Main = (props: propsData) => {
                     setNavSelect1(!navSelect)
                   }, navSelect1 == false ? 400 : 0);
                 }}
-                className={navSelect ? "flex flex-col w-[12.5%] h-[90%] transition-all transform duration-700 ease-in-out  justify-center  pt-6 pb-6 pl-[0.6rem] pr-[0.6rem]  rounded-3xl space-y-[0.4rem] backdrop-blur-lg bg-white/20 " : "flex flex-col w-[4%] transition-all transform duration-700 ease-in-out  justify-center  pt-6 pb-4 pl-[0.6rem] pr-[0.6rem] rounded-3xl space-y-[0.4rem] backdrop-blur-lg bg-white/20 "}>
+                className={navSelect ? "flex flex-col w-[12.5%] h-[90%] transition-all transform duration-700 ease-in-out  justify-center  pt-6 pb-6 pl-[0.6rem] pr-[0.6rem]  rounded-3xl space-y-[0.4rem] backdrop-blur-lg bg-white/10 " : "flex flex-col w-[4%] transition-all transform duration-700 ease-in-out  justify-center  pt-6 pb-4 pl-[0.6rem] pr-[0.6rem] rounded-3xl space-y-[0.4rem] backdrop-blur-lg bg-white/10 "}>
                 <div>
                   <img src='/MAinLogo.svg' className={navSelect ? "h-[4rem]  hover:cursor-pointer mb-1 w-[11rem] transition-all transform duration-300 ease-in-out" : "h-[3rem]  transition-all transform duration-300 ease-in-out hover:cursor-pointer mb-1 w-[10rem]"} />
                 </div>
@@ -121,9 +157,6 @@ const Main = (props: propsData) => {
                       transition={{ duration: 0.5 }} className="text-white font-semibold text-lg opacity-80 font-sans pt-1  transition-all transform duration-300 ease-in-out">My Lists</motion.p>}
                   </div>
                 </div>
-
-
-
 
                 <div>
                   <div className={navSelect ? "flex hover:bg-gray-300 p-2 cursor-pointer transition-all transform duration-300 ease-in-out  rounded-full hover:bg-opacity-40 opacity-90 hover:opacity-100 flex-row space-x-3 items-center" : "flex hover:bg-gray-300 p-2 cursor-pointer transition-all transform duration-300 ease-in-out  rounded-full hover:bg-opacity-40 opacity-90 hover:opacity-100 flex-row space-x-0 items-center"} onClick={() => setNavSelect(!navSelect)}>
@@ -230,8 +263,8 @@ const Main = (props: propsData) => {
             transition={animationTransition}
 
             className="absolute  z-[-50] top-[-1.9rem] left-[6rem]">
-            <div className=" relative p-6 flex flex-row backdrop-blur-lg bg-white/10 rounded-3xl">
-              <video ref={videoRef} muted autoPlay loop className=" w-[45rem] rounded-lg ">
+            <div className=" relative p-6 flex flex-row backdrop-blur-lg bg-black/30 w-[86%] rounded-3xl">
+              <video id="myVideo" ref={videoRef} muted autoPlay loop className=" w-[45rem] rounded-lg ">
                 <source src="/Digital-age-demo.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
@@ -250,23 +283,36 @@ const Main = (props: propsData) => {
                 </div>
               </div>
 
-
-              <div className="ml-6 mt-1">
+              <div className="ml-6 mt-1 ">
                 <div className="flex flex-col space-y-2">
-                  <div className="flex flex-row space-x-4 items-center">
+                  <div className="flex relative flex-row space-x-4 items-center">
                     <div>
                       <img src="./Peter.jpeg" className="h-[4rem] w-[4rem] rounded-full" />
                     </div>
 
                     <div>
-                      <p className="text-[1.3rem] font-bold">
+                      <p className="text-[1.4rem] font-bold">
                         Peter Michaels
                       </p>
+
                     </div>
 
-                    <div>
-                      <CheckBadgeIcon className="h-8 w-8 text-blue-600 " />
+                    <div className="relative">
+                      <div className="absolute z-[-50] bg-white rounded-full h-4 w-4 left-2 top-2"></div>
+                      <CheckBadgeIcon className="h-8 w-8 text-blue-500 " />
                     </div>
+
+                    <div className="absolute right-2">
+                      <div className=" backdrop-blur-lg p-1 rounded-full">
+                        <EllipsisHorizontalIcon className="text-white h-8 w-8" />
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div className="pl-2 pt-3">
+                    <p className="text-white text-lg font-semibold w-[90%]">Modern tools for a modern world! Make sure you sign up today! www.digitalage.com 
+                    <span className="text-cyan-200">#freedom #freespeechmatters #making #memories</span></p>
                   </div>
                 </div>
 
@@ -279,7 +325,7 @@ const Main = (props: propsData) => {
           <motion.div initial="initial"
             animate="animate"
             variants={animationVariants}
-            transition={animationTransition} className="absolute bottom-[22.8rem] left-[7rem] ">
+            transition={animationTransition} className="absolute bottom-[25.8rem] left-[7rem] ">
             <motion.div className="relative backdrop-blur-lg bg-white/20 w-[45.5rem] h-[0.9rem] rounded-full ">
               <motion.div style={{ width: `${progress}%` }} className={`absolute bg-cyan-500 transition-all ease-out duration-1000 ease-in-out  h-[0.9rem] rounded-full `}>
 
@@ -291,7 +337,11 @@ const Main = (props: propsData) => {
       </main>
 
     </div>
+
+
   );
 };
+
+
 
 export default Main;
