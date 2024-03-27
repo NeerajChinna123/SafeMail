@@ -292,7 +292,8 @@ export default function ActivityTabs() {
                                         </div>
 
                                         <div className="">
-                                            {like?.following ?
+                                            
+                                            {like.following!=null ? like?.following ?
                                                 <div className="pl-[10rem]">
                                                     <div className="px-4 py-3 rounded-xl cursor-pointer  backdrop-blur-lg transition hover:bg-white/30 transform duration-500 ease-in-out bg-white/20 ">
                                                         <p className="font-semibold">Following</p>
@@ -303,7 +304,7 @@ export default function ActivityTabs() {
                                                         <p className="font-semibold">Follow</p>
                                                     </div>
 
-                                                </div>}
+                                                </div> : <div></div>}
                                         </div>
                                     </div>
                                 ))}
