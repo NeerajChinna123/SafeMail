@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 
 const tabsData = [
     {
-        label: "Likes (44)",
+        label: "Likes (21)",
         content: "Likes",
     },
     {
@@ -46,11 +46,170 @@ export default function ActivityTabs() {
     const likes = [
         {
             id: 1,
-            userName: '@Neeraj',
-            fullName: 'Neeraj Baipureddy',
+            userName: '@PeterMichaels',
+            fullName: 'Peter Michaels',
+            following: null,
+            img: './Peter.jpeg'
 
         },
         {
+            id: 2,
+            userName: '@Neeraj',
+            fullName: 'Neeraj Baipureddy',
+            following: false,
+            img: './Neeraj.jpg'
+
+        },
+        {
+            id: 3,
+            userName: '@Awan',
+            fullName: 'Awan Nord',
+            following: true,
+            img: './Awan 1.svg'
+
+        },
+        {
+            id: 4,
+            userName: '@Neeraj',
+            fullName: 'Neeraj Baipureddy',
+            following: false,
+            img: './Neeraj.jpg'
+
+        },
+        {
+            id: 5,
+            userName: '@Awan',
+            fullName: 'Awan Nord',
+            following: true,
+            img: './Awan 1.svg'
+
+        },
+        {
+            id: 6,
+            userName: '@Neeraj',
+            fullName: 'Neeraj Baipureddy',
+            following: false,
+            img: './Neeraj.jpg'
+
+        },
+        {
+            id: 7,
+            userName: '@Awan',
+            fullName: 'Awan Nord',
+            following: true,
+            img: './Awan 1.svg'
+
+        },
+        {
+            id: 8,
+            userName: '@Neeraj',
+            fullName: 'Neeraj Baipureddy',
+            following: false,
+            img: './Neeraj.jpg'
+
+        },
+        {
+            id: 9,
+            userName: '@Awan',
+            fullName: 'Awan Nord',
+            following: true,
+            img: './Awan 1.svg'
+
+        },
+        {
+            id: 10,
+            userName: '@Neeraj',
+            fullName: 'Neeraj Baipureddy',
+            following: false,
+            img: './Neeraj.jpg'
+
+        },
+        {
+            id: 11,
+            userName: '@Awan',
+            fullName: 'Awan Nord',
+            following: true,
+            img: './Awan 1.svg'
+
+        },
+        {
+            id: 12,
+            userName: '@Neeraj',
+            fullName: 'Neeraj Baipureddy',
+            following: false,
+            img: './Neeraj.jpg'
+
+        },
+        {
+            id: 13,
+            userName: '@Awan',
+            fullName: 'Awan Nord',
+            following: true,
+            img: './Awan 1.svg'
+
+        },
+        {
+            id: 14,
+            userName: '@Neeraj',
+            fullName: 'Neeraj Baipureddy',
+            following: false,
+            img: './Neeraj.jpg'
+
+        },
+        {
+            id: 15,
+            userName: '@Awan',
+            fullName: 'Awan Nord',
+            following: true,
+            img: './Awan 1.svg'
+
+        },
+        {
+            id: 16,
+            userName: '@Neeraj',
+            fullName: 'Neeraj Baipureddy',
+            following: false,
+            img: './Neeraj.jpg'
+
+        },
+        {
+            id: 17,
+            userName: '@Awan',
+            fullName: 'Awan Nord',
+            following: true,
+            img: './Awan 1.svg'
+
+        },
+        {
+            id: 18,
+            userName: '@Neeraj',
+            fullName: 'Neeraj Baipureddy',
+            following: false,
+            img: './Neeraj.jpg'
+
+        },
+        {
+            id: 19,
+            userName: '@Awan',
+            fullName: 'Awan Nord',
+            following: true,
+            img: './Awan 1.svg'
+
+        },
+        {
+            id: 20,
+            userName: '@Neeraj',
+            fullName: 'Neeraj Baipureddy',
+            following: false,
+            img: './Neeraj.jpg'
+
+        },
+        {
+            id: 21,
+            userName: '@Awan',
+            fullName: 'Awan Nord',
+            following: true,
+            img: './Awan 1.svg'
 
         }
     ]
@@ -102,8 +261,45 @@ export default function ActivityTabs() {
                 </div>
             </div>
             <div className="py-4 md:px-1">
-                {tabsData[activeTabIndex].content == "Reactions" ? (
-                    <p></p>
+                {tabsData[activeTabIndex].content == "Likes" ? (
+                    <div className="max-h-[28rem] overflow-y-scroll   space-y-3 ml-[0.6rem]">
+                        {likes?.map((like: any) => (
+                            <div className="flex relative flex-row space-x-5 p-4 w-[30rem]  backdrop-blur-md rounded-2xl bg-black/60">
+                                <div>
+                                    <img src={like?.img} className="h-[3.2rem] w-[3.2rem] rounded-full" />
+                                </div>
+
+                                <div className="flex flex-col space-y-1">
+                                    <div>
+                                        <p className="font-semibold text-md">
+                                            {like?.fullName}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p className=" opacity-80 text-sm">
+                                            {like?.userName}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="">
+                                    {like?.following ?
+                                        <div className="pl-[10rem]">
+                                            <div className="px-4 py-3 rounded-xl cursor-pointer  backdrop-blur-lg bg-white/20 ">
+                                                <p className="font-semibold">Following</p>
+                                            </div>
+                                        </div> :
+                                        <div className="right-[2rem] absolute ">
+                                            <div className="px-5 py-3 cursor-pointer rounded-xl bg-cyan-600 ">
+                                                <p className="font-semibold">Follow</p>
+                                            </div>
+
+                                        </div>}
+                                </div>
+                            </div>
+                        ))}
+
+                    </div>
                 ) : (
                     <p></p>
                 )}

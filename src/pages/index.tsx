@@ -44,13 +44,8 @@ const Main = (props: propsData) => {
     // Function to update progress
     const updateProgress = () => {
       //@ts-ignore
-
-
-
-
       //@ts-ignore
-
-
+      
       setTimeout(() => {
         var vide = document.getElementById('myVideo');
         //@ts-ignore
