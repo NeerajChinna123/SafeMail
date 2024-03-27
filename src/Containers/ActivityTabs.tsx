@@ -3,6 +3,7 @@ import { ArrowPathRoundedSquareIcon as A3, ChatBubbleLeftRightIcon as C3 } from 
 import { HeartIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as H2 } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 
 const tabsData = [
@@ -215,95 +216,106 @@ export default function ActivityTabs() {
     ]
 
     return (
-        <div className="absolute mt-[0.2rem] z-[1000] lg:mt-12 w-[34rem] top-[14rem] right-[-0.88rem] ">
-            <div className="relative">
-                <div className="absolute left-[0.2rem] top-[0.4rem] transition-all transform duration-500 ease-in-out">
-                    {activeTabIndex == 0 ? <HeartIcon className="h-7 w-7 text-cyan-400 transition-all transform duration-500 ease-in-out" /> : <H2 className="h-7 w-7 text-white transition-all transform duration-500 ease-in-out" />}
+        <AnimatePresence>
+            <div className="absolute mt-[0.2rem] z-[1000] lg:mt-12 w-[34rem] top-[14rem] right-[-0.88rem] ">
+                <div className="relative">
+                    <div className="absolute left-[0.2rem] top-[0.4rem] transition-all transform duration-500 ease-in-out">
+                        {activeTabIndex == 0 ? <HeartIcon className="h-7 w-7 text-cyan-400 transition-all transform duration-500 ease-in-out" /> : <H2 className="h-7 w-7 text-white transition-all transform duration-500 ease-in-out" />}
+                    </div>
 
-                </div>
+                    <div className="absolute left-[10.4rem] top-[0.4rem]">
 
-                <div className="absolute left-[10.4rem] top-[0.4rem]">
-
-                    {activeTabIndex == 1 ? <C3 className="h-7 w-7 text-cyan-400 transition-all transform duration-500 ease-in-out" /> : <ChatBubbleLeftRightIcon className="h-7 w-7 text-white transition-all transform duration-500 ease-in-out" />}
-
-                </div>
-
-                <div className="absolute left-[22.1rem] top-[0.4rem]">
-                    {activeTabIndex == 2 ? <ArrowPathRoundedSquareIcon className="h-7 w-7 text-cyan-400 transition-all transform duration-500 ease-in-out" /> : <A3 className="h-7 w-7 text-white transition-all transform duration-500 ease-in-out" />}
-                </div>
-                <div className="flex space-x-2 w-[32.5rem]  justify-center pb-[0.2rem] md:pb-[0.3rem] border-b-2 border-gray-200">
-                    {tabsData.map((tab, idx) => {
-                        return (
-                            <div className="px-[1rem]">
-                                <button
-                                    key={idx}
-                                    //@ts-ignore
-                                    ref={(el) => (tabsRef.current[idx] = el)}
-                                    className={
-                                        `pt-2 pb-3  text-md w-[9rem] text-white font-semibold transition transform duration-500 ease-in-out font-poppins tracking-wide  ` +
-                                        `${tabsRef.current[idx] == tabsRef.current[activeTabIndex] &&
-                                        "text-cyan-200 font-semibold"
-                                        }`
-                                    }
-                                    onClick={() => setActiveTabIndex(idx)}
-                                >
-                                    {tab.label}
-                                </button>
-                            </div>
-                        );
-                    })}
-                </div>
-                <div className="">
-                    <span
-                        className="absolute bottom-0  z-auto block h-1 bg-cyan-500 transition-all duration-300"
-                        style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
-                    />
-                </div>
-            </div>
-            <div className="py-4 md:px-1">
-                {tabsData[activeTabIndex].content == "Likes" ? (
-                    <div className="max-h-[28rem] overflow-y-scroll   space-y-3 ml-[0.6rem]">
-                        {likes?.map((like: any) => (
-                            <div className="flex relative flex-row space-x-5 p-4 w-[30rem]  backdrop-blur-md rounded-2xl bg-black/60">
-                                <div>
-                                    <img src={like?.img} className="h-[3.2rem] w-[3.2rem] rounded-full" />
-                                </div>
-
-                                <div className="flex flex-col space-y-1">
-                                    <div>
-                                        <p className="font-semibold text-md">
-                                            {like?.fullName}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p className=" opacity-80 text-sm">
-                                            {like?.userName}
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="">
-                                    {like?.following ?
-                                        <div className="pl-[10rem]">
-                                            <div className="px-4 py-3 rounded-xl cursor-pointer  backdrop-blur-lg bg-white/20 ">
-                                                <p className="font-semibold">Following</p>
-                                            </div>
-                                        </div> :
-                                        <div className="right-[2rem] absolute ">
-                                            <div className="px-5 py-3 cursor-pointer rounded-xl bg-cyan-600 ">
-                                                <p className="font-semibold">Follow</p>
-                                            </div>
-
-                                        </div>}
-                                </div>
-                            </div>
-                        ))}
+                        {activeTabIndex == 1 ? <C3 className="h-7 w-7 text-cyan-400 transition-all transform duration-500 ease-in-out" /> : <ChatBubbleLeftRightIcon className="h-7 w-7 text-white transition-all transform duration-500 ease-in-out" />}
 
                     </div>
-                ) : (
-                    <p></p>
-                )}
+
+                    <div className="absolute left-[22.1rem] top-[0.4rem]">
+                        {activeTabIndex == 2 ? <ArrowPathRoundedSquareIcon className="h-7 w-7 text-cyan-400 transition-all transform duration-500 ease-in-out" /> : <A3 className="h-7 w-7 text-white transition-all transform duration-500 ease-in-out" />}
+                    </div>
+                    <div className="flex space-x-2 w-[32.5rem]  justify-center pb-[0.2rem] md:pb-[0.3rem] border-b-2 border-gray-200">
+                        {tabsData.map((tab, idx) => {
+                            return (
+                                <div className="px-[1rem]">
+                                    <button
+                                        key={idx}
+                                        //@ts-ignore
+                                        ref={(el) => (tabsRef.current[idx] = el)}
+                                        className={
+                                            `pt-2 pb-3  text-md w-[9rem]  font-semibold transition transform duration-500 ease-in-out font-poppins tracking-wide  ` +
+                                            `${tabsRef.current[idx] == tabsRef.current[activeTabIndex] &&
+                                            "text-cyan-200 font-semibold"
+                                            }`
+                                        }
+                                        onClick={() => setActiveTabIndex(idx)}
+                                    >
+                                        {tab.label}
+                                    </button>
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <div className="">
+                        <span
+                            className="absolute bottom-0  z-auto block h-1 bg-cyan-500 transition-all duration-300"
+                            style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
+                        />
+                    </div>
+                </div>
+                <div className="py-4 md:px-1">
+                    {tabsData[activeTabIndex].content == "Likes" ? (
+                        <motion.div
+
+                        initial={{ opacity: 0 }} // Initial state of the component (hidden)
+                        animate={{ opacity: tabsData[activeTabIndex].content == "Likes"  ? 1 : 0 }} // Animate to visible or hidden based on the `isVisible` prop
+                        exit={{ opacity: 0 }} // State to animate to when the component is being removed
+                        transition={{ duration: 0.5 }} // Animation duration
+
+                            className="px-1">
+                            <div className="max-h-[28rem] overflow-y-scroll relative  scrollbar custom-scrollbar  scrollbar-thumb-black/60 scrollbar scrollbar-thumb-backdrop-blur-md  scrollbar-thumb-w-[0.2rem]  scrollbar-thumb-rounded-lg  space-y-3 ml-[0.6rem]">
+                                {likes?.map((like: any) => (
+                                    <div className="flex relative flex-row space-x-5 p-4 w-[30rem]  backdrop-blur-md rounded-2xl bg-black/60">
+                                        <div>
+                                            <img src={like?.img} className="h-[3.2rem] w-[3.2rem] rounded-full" />
+                                        </div>
+
+                                        <div className="flex flex-col space-y-1">
+                                            <div>
+                                                <p className="font-semibold text-md">
+                                                    {like?.fullName}
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p className=" opacity-80 text-sm">
+                                                    {like?.userName}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="">
+                                            {like?.following ?
+                                                <div className="pl-[10rem]">
+                                                    <div className="px-4 py-3 rounded-xl cursor-pointer  backdrop-blur-lg transition hover:bg-white/30 transform duration-500 ease-in-out bg-white/20 ">
+                                                        <p className="font-semibold">Following</p>
+                                                    </div>
+                                                </div> :
+                                                <div className="right-[2rem] absolute ">
+                                                    <div className="px-5 py-3 hover:bg-cyan-700 transition transform duration-500 ease-in-out cursor-pointer rounded-xl bg-cyan-600 ">
+                                                        <p className="font-semibold">Follow</p>
+                                                    </div>
+
+                                                </div>}
+                                        </div>
+                                    </div>
+                                ))}
+
+                            </div>
+                        </motion.div>
+                    ) : (
+                        <p></p>
+                    )}
+                </div>
+
             </div>
-        </div>
+        </AnimatePresence>
     );
 }

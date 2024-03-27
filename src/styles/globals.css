@@ -129,3 +129,8 @@ main {
 .ck.ck-editor__main>.ck-editor__editable{
   height:130px
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+  padding-right: 2px;/* Adjust the width as needed */
+}

@@ -45,7 +45,7 @@ const Main = (props: propsData) => {
     const updateProgress = () => {
       //@ts-ignore
       //@ts-ignore
-      
+
       setTimeout(() => {
         var vide = document.getElementById('myVideo');
         //@ts-ignore
@@ -125,10 +125,10 @@ const Main = (props: propsData) => {
                     setNavSelect2(!navSelect)
                   }, navSelect2 == false ? 0 : 600);
                 }
-               
-              }
-              
-              
+
+                }
+
+
                 className={navSelect ? "flex flex-col w-[12.5%] h-[90%] transition-all transform duration-700 ease-in-out  justify-center  pt-6 pb-6 pl-[0.6rem] pr-[0.6rem]  rounded-3xl space-y-[0.4rem] backdrop-blur-lg bg-white/10 " : "flex flex-col w-[4%] transition-all transform duration-700 ease-in-out  justify-center  pt-6 pb-4 pl-[0.6rem] pr-[0.6rem] rounded-3xl space-y-[0.4rem] backdrop-blur-lg bg-white/10 "}>
                 <div>
                   <img src='/MAinLogo.svg' className={navSelect ? "h-[4rem]  hover:cursor-pointer mb-1 w-[11rem] transition-all transform duration-300 ease-in-out" : "h-[3rem]  transition-all transform duration-300 ease-in-out hover:cursor-pointer mb-1 w-[10rem]"} />
@@ -173,7 +173,6 @@ const Main = (props: propsData) => {
                       transition={{ duration: 0.5 }} className="text-white font-semibold text-lg opacity-80 font-sans pt-1  transition-all transform duration-300 ease-in-out">Contacts</motion.p>}
                   </div>
                 </div>
-
                 <div>
                   <div className={navSelect ? "flex hover:bg-gray-300 p-2 cursor-pointer transition-all transform duration-300 ease-in-out  rounded-full hover:bg-opacity-40 opacity-90 hover:opacity-100 flex-row space-x-3 items-center" : "flex hover:bg-gray-300 p-2 cursor-pointer transition-all transform duration-300 ease-in-out  rounded-full hover:bg-opacity-40 opacity-90 hover:opacity-100 flex-row space-x-0 items-center"} onClick={() => setNavSelect(!navSelect)}>
                     <MagnifyingGlassIcon className={navSelect ? "h-10 w-10 p-0 text-white transition-all transform duration-200 ease-in-out " : "h-9 w-9 p-0 text-white transition-all transform duration-200 ease-in-out "} />
@@ -268,7 +267,7 @@ const Main = (props: propsData) => {
             variants={animationVariants}
             transition={animationTransition}
 
-            className={navSelect2 ?"absolute  z-[-50] top-[-1.9rem] left-[6rem]":"absolute  z-[100] top-[-1.9rem] left-[6rem]"}>
+            className={navSelect2 ? "absolute  z-[-50] top-[-1.9rem] left-[6rem]" : "absolute  z-[100] top-[-1.9rem] left-[6rem]"}>
             <div className=" relative p-6 flex flex-row backdrop-blur-lg bg-white/10 w-[86%] rounded-3xl">
               <video id="myVideo" ref={videoRef} muted autoPlay loop className=" w-[45rem] rounded-lg ">
                 <source src="/Digital-age-demo.mp4" type="video/mp4" />
@@ -330,8 +329,6 @@ const Main = (props: propsData) => {
 
             </div>
           </motion.div>
-
-
           <motion.div initial="initial"
             animate="animate"
             variants={animationVariants}
